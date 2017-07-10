@@ -1,4 +1,5 @@
-import { Injectable, Component } from '@angular/core';
+import { Injectable} from '@angular/core';
+// import { Component } from '@angular/core';
 import { GamestatusProvider } from '../gamestatus/gamestatus';
 /*
   Generated class for the BotProvider provider.

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Component } from '@angular/core';
+// import { Component } from '@angular/core';
 import { BotProvider } from '../bot/bot';
 import { GamestatusProvider } from '../gamestatus/gamestatus';
 
@@ -39,8 +39,6 @@ export class GameServiceProvider {
 						  	[3,4,5],
  							[6,7,8]];
 		let nextMove = tetris[y][z];
-		
-		var tmp = true;
 
 		if(this.isFieldFull(nextMove) || this.gameStatus.won_fields[nextMove]){
 			/* alle nicht gewonnen felder möglicher nächster zug */

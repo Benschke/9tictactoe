@@ -7,13 +7,13 @@ import { GameServiceProvider } from '../providers/game-service/game-service';
 
 
 import { LoginPage } from '../pages/login/login';
-import { HomePage } from '../pages/home/home';
+// import { HomePage } from '../pages/home/home';
 @Component({
   templateUrl: 'app.html',
   providers: [GameServiceProvider,BotProvider]
 })
 export class MyApp {
-  rootPage:any = HomePage;
+  rootPage:any = LoginPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {

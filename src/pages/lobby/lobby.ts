@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import * as firebase from 'firebase/app';
 
+import { AuthProvider } from '../../providers/auth/auth';
 
 /**
  * Generated class for the LobbyPage page.
@@ -16,11 +17,12 @@ import * as firebase from 'firebase/app';
   templateUrl: 'lobby.html',
 })
 export class LobbyPage {
+  created:boolean = false;
 	items: FirebaseListObservable<any[]>;
 	ref = firebase.database().ref("/games");
 	gameType;
 	lobbys;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public db: AngularFireDatabase) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public db: AngularFireDatabase, public auth: AuthProvider) {
   	this.gameType = this.navParams.get('type');
   	this.lobbys = this.ref.orderByChild('state').equalTo(1);
     this.items = db.list('/games',{
@@ -28,36 +30,40 @@ export class LobbyPage {
     		orderByChild: 'state',
     		equalTo: 1
     	}
-    });
-
-  	
+    });  	
   }
-
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LobbyPage');
   }
+
   createGame(){
-  	let user:any = firebase.auth().currentUser;
-  	alert(user);
-  	let currentGame:any = {
-  		creator: {uid: user.uid, displayName: user.displayName},
-  		// joiner: null,
-  		state: 1 // open
-  	};
-  	this.ref.push().set(currentGame);
+    if(!this.created){
+    	let user:any = firebase.auth().currentUser;
+    	let currentGame:any = {
+    		creator: {uid: user.uid, displayName: this.auth.getdisplayName},
+    		// joiner: null,
+    		state: 1 // open
+    	};
+    	this.ref.push().set(currentGame);
+      this.created = !this.created;
+    }
   }
+
   joinGame(key){
   	let user:any = firebase.auth().currentUser;
-  	let gameRef:any = this.ref.child(key);
+  	let gameRef:any = this.ref.child(key.$key);
+    console.log(gameRef);
   	gameRef.transaction(function(game){ // falls mehrere spieler gleichzeitig gleiche lobby joinen wollen würden 
-  		console.log(game);
-  		if(game.creator.uid != user.uid) return false;
-  		if(!game.joiner){  			
-  			game.state = 2; // joined
-  			game.joiner = {uid: user.uid, displayName: user.displayName};
-  		}
-  		return game;
+      if(game){
+      		if(game.creator.uid != user.uid) return false;
+      		if(!game.joiner){  			
+      			game.state = 2; // joined
+      			game.joiner = {uid: user.uid, displayName: this.auth.getdisplayName};
+      		}
+          console.log(game);
+      		return game;
+      }
   	});
   	alert("Failed to join!");
   }

@@ -1,15 +1,16 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { GooglePlus } from '@ionic-native/google-plus';
 import { HomePage } from '../home/home';
 
-import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireModule } from 'angularfire2';
-
-import * as firebase from 'firebase/app';
-
+import { Observable } from 'rxjs/observable';
+import 'rxjs/Rx';
+import 'rxjs/add/operator/map';
 import { GamestatusProvider } from '../../providers/gamestatus/gamestatus';
 
+import { AuthProvider } from '../../providers/auth/auth';
+import * as firebase from 'firebase/app';
+
+// import * as firebase from 'firebase/app';
 /**
  * Generated class for the LoginPage page.
  *
@@ -23,31 +24,24 @@ import { GamestatusProvider } from '../../providers/gamestatus/gamestatus';
 })
 export class LoginPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public googleplus: GooglePlus, public gameStatus: GamestatusProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public auth: AuthProvider, public gameStatus: GamestatusProvider) {
+    firebase.auth().onAuthStateChanged(firebaseUser => {
+      if(firebaseUser){
+        // wenn anonym dann setze name Guest-{{UID}}        
+        this.gameStatus.players[0].name  = this.auth.getdisplayName();
+        this.navCtrl.setRoot(HomePage);        
+      } 
+    });
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
   }
-  googleauth(){
-  	this.googleplus.login({
-      'webClientId' : '495290538261-97tkujbj8pq8slcs0j8ptp5e9692a0l1.apps.googleusercontent.com',
-      'offline' : true
-    })
-  	.then((res)=>{
-  		const firecreds = firebase.auth.GoogleAuthProvider.credential(res.idToken);
-        firebase.auth().signInWithCredential(firecreds).then((success)=>{
-           if(firebase.auth().currentUser.displayName){
-             this.gameStatus.players[0].name = firebase.auth().currentUser.displayName;
-           } 
-          // else alert("Cant Read Name");
-          this.navCtrl.setRoot(HomePage);
-        }).catch((err)=>{
-          alert('Firebase auth failed ' + err);
-      })  		
-  	}).catch((err)=>{
-  		alert('Error:' + err);
-  	})
+  anonAuth(){
+    this.auth.signInAnonym();    
+  }
+  googleAuth(){
+    this.auth.signInGoogle();  
   }
 }
 

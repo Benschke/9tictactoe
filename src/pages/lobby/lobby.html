@@ -15,6 +15,5 @@
 
 <ion-content padding>
 <button ion-button (click)="createGame()" full block outline>Create Lobby</button>
--{{item}}-
-	<button *ngFor="let item of items | async "ion-button (click)="joinGame(item.$key)" full block>Join {{item.creator.displayName}}'s Lobby</button>    
+	<button *ngFor="let item of items | async "ion-button (click)="joinGame(item)" full block>Join {{item.creator.displayName}}'s Lobby</button>    
 </ion-content>
