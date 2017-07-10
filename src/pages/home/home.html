@@ -1,0 +1,14 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>
+            Hello {{user}}!
+        </ion-title>
+    </ion-navbar>
+</ion-header> 
+<ion-content padding class="ctr buttons">
+    <button type="button" ion-button [navPush]="gamePage" [navParams]="{ type: 0}">Botgame</button><br>
+    <button type="button" ion-button [navPush]="gamePage" [navParams]="{ type: 1}">2v2 - Local</button>
+</ion-content>
+<!--
+/* 0 Bot, 1 MP Local, 2 MP Online*/
+-->

@@ -1,0 +1,25 @@
+<!--
+
+Frei mit ' ' ersetzen, dann müsste aber auch das feld zum anklicken gleich groß sein wie die anderen felder
+felder zum anklicken sollen alle gleichgroß sein egal was für inhalt sie haben sprich alle 9 "button" sollen das ganze tetris feld ausfüllen
+die 9 tetris felder füllen schon den screen aus
+
+-->
+
+<ion-content padding>
+    <ion-grid [ngClass]="getPlayerTurnClass()">
+        <ion-row *ngFor="let tetrisIndex of index; let r = index; trackBy: trackByFn">
+            <ion-col *ngFor="let x of tetrisIndex; let x = index; trackBy: trackByFn" [ngClass]="getClassValue(x)">
+                <div [ngClass]="{'player1_won':gameStatus.won_fields[x]==1,'player2_won':gameStatus.won_fields[x]==2,'bordern':x%2==0,'bordernplus1':x%2!=0}">
+                    <ion-row class="ctr fc tile" *ngFor="let y of index2; let y = index; trackBy: trackByFn">
+                        <ion-col *ngFor="let z of index2; let z = index; trackBy: trackByFn" (click)="playerClick(x,y,z)">
+                            <div class="tile fc">
+                                <span class="ctr tile-text" [ngClass]="{'player1':gameStatus.fields[x][y][z]==1,'player2': gameStatus.fields[x][y][z]==2}">{{(gameStatus.fields[x][y][z]==0)? ' ': ((gameStatus.fields[x][y][z]==1)? 'x' : 'o')}}</span>
+                            </div>
+                        </ion-col>
+                    </ion-row>        
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

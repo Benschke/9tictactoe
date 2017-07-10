@@ -1,0 +1,60 @@
+$tetrisn: #ccc;
+$tetrisnplus1: #000;
+page-game {
+
+}
+.player1{
+	color: #0000b3;
+}
+.player2{
+	color: #b30000;
+}
+.player1_border{
+	border: 3px solid #0000b3;
+}
+.player2_border{
+	border: 3px solid #b30000;
+}
+.player1_won{
+	background: rgba(204,204,255, .70);	
+}
+.player2_won{
+	background: rgba(255, 204, 204, .70);
+}
+.default_color{
+	color: #ccc;
+}
+.tetris {	
+    margin-top: 25px;
+	width: 33%;
+}
+.bordern{
+	border: 1px solid $tetrisn;
+}
+.bordernplus1{
+	border: 1px solid $tetrisnplus1;
+}
+
+/* wird ausgewählt wenn der nächste spielzug in diesem feld stattfinden muss */
+.selected{
+	background: rgba(0, 0, 0, .3);
+}
+
+.tile {
+	cursor: pointer;
+	border: 1px solid #ccc;	
+	overflow:hidden; 
+	height:100%; width:100%; 	
+}
+.tile-text{
+	font-size: 2vw;
+}
+.ctr{
+	text-align: center;
+}
+.fc{
+	height:100%; width:100%; 
+}
+.row.noPadding{
+  padding:0;
+}
