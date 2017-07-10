@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { GamePage } from '../game/game';
+import { LobbyPage } from '../lobby/lobby';
 import { GameServiceProvider } from '../../providers/game-service/game-service';
 import { GamestatusProvider } from '../../providers/gamestatus/gamestatus';
 @Component({
@@ -10,10 +11,12 @@ import { GamestatusProvider } from '../../providers/gamestatus/gamestatus';
 })
 export class HomePage {
 	gamePage = GamePage;	
+	lobbyPage = LobbyPage;
 	user;
   constructor(public navCtrl: NavController, public gs: GameServiceProvider, public gameStatus: GamestatusProvider) {
   	this.user =	this.gameStatus.players[0].name;
-  	alert(this.gameStatus.players[0].name);
   }
-
 }
+
+
+

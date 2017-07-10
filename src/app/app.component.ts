@@ -13,7 +13,7 @@ import { HomePage } from '../pages/home/home';
   providers: [GameServiceProvider,BotProvider]
 })
 export class MyApp {
-  rootPage:any = LoginPage;
+  rootPage:any = HomePage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {
@@ -23,9 +23,5 @@ export class MyApp {
       splashScreen.hide();
     });
   }
-
-
-
-
 }
 

@@ -66,6 +66,8 @@ export class BotProvider {
 	}
 
 	randomTile(possibleChoices){
+		/* todo wenn kein zug mehr möglich iwas checken solange so */
+		if(!possibleChoices||possibleChoices.length < 0) return null;
 		let randomField: number = possibleChoices[Math.floor(Math.random()*possibleChoices.length)];
 		let x: number = 0;
 		for(let row of this.gameStatus.fields[randomField]){

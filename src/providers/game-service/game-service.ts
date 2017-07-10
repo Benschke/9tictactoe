@@ -102,16 +102,18 @@ export class GameServiceProvider {
 		return true;
 	}
 	gameOver(){
-		/* TODO wenn game ganz over*/
-		return false;
+		for(let isFieldWon of this.gameStatus.won_fields){
+			if(!isFieldWon) return false;
+		}
+		return true;
 	}
 	playerClick(x,y,z){
 		switch(this.gameStatus.gameType) { 
 			case 0: { 
 				/* Spieler */
-				this.PlayerClick(x,y,z);
+				if(this.gameStatus.turn) this.PlayerClick(x,y,z);
 				/* BOT */
-				if(!this.gameOver()){
+				if(!this.gameStatus.turn && !this.gameOver()){
 					let choice: any = this.bot.getChoice();
 					if(choice){
 						if(!this.PlayerClick(choice[0],choice[1],choice[2])) console.log("Fehlerhaftes Tile ausgewählt!" + choice);

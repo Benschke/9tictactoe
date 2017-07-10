@@ -10,6 +10,8 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { GamePage } from '../pages/game/game';
 import { LoginPage } from '../pages/login/login';
+import { LobbyPage } from '../pages/lobby/lobby';
+
 import { BotProvider } from '../providers/bot/bot';
 import { GameServiceProvider } from '../providers/game-service/game-service';
 import { GamestatusProvider } from '../providers/gamestatus/gamestatus';
@@ -30,7 +32,8 @@ firebase.initializeApp(firebaseConfig);
     MyApp,
     HomePage,
     GamePage,
-    LoginPage
+    LoginPage,
+    LobbyPage
   ],
   imports: [
     BrowserModule,
@@ -45,7 +48,8 @@ firebase.initializeApp(firebaseConfig);
     MyApp,
     HomePage,
     GamePage,
-    LoginPage
+    LoginPage,
+    LobbyPage
   ],
   providers: [
     StatusBar,
