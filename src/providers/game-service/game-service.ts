@@ -56,6 +56,15 @@ export class GameServiceProvider {
 			this.gameStatus.nextfield = [nextMove];
 		}	
 	}
+	isFull(x){
+		let field: any = this.gameStatus.fields[x];
+		for(let row of field){
+			for(let tile of row){
+				if(tile==0) return false;
+			}
+		}
+		return true;
+	}
 	isWin(x,y,z){
 		let symbol: number = (this.gameStatus.turn)? 1 : 2;
 		let field: any = this.gameStatus.fields[x];
@@ -90,6 +99,8 @@ export class GameServiceProvider {
 
 		if(this.isWin(x,y,z)){
 			this.gameStatus.won_fields[x] = symbol;
+		}else if(this.isFull(x)){
+			this.gameStatus.won_fields[x] = 3;
 		}
 		let fieldN: number = [[0,1,2],
 						  	  [3,4,5],
