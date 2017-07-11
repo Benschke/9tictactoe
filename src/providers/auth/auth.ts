@@ -53,5 +53,8 @@ export class AuthProvider {
     return (firebase.auth().currentUser.isAnonymous) ? "Guest-"+firebase.auth().currentUser.uid : firebase.auth().currentUser.displayName;
   }
 
+  getUserUid(){
+    return this.getcurrentUser().uid;
+  }
 }
           

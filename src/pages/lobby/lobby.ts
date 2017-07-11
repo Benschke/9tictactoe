@@ -17,7 +17,7 @@ import { AuthProvider } from '../../providers/auth/auth';
   templateUrl: 'lobby.html',
 })
 export class LobbyPage {
-  created:boolean = false;
+  alreadyCreated:boolean = false;
 	items: FirebaseListObservable<any[]>;
 	ref = firebase.database().ref("/games");
 	gameType;
@@ -38,15 +38,15 @@ export class LobbyPage {
   }
 
   createGame(){
-    if(!this.created){
+    if(!this.alreadyCreated){
     	let user:any = firebase.auth().currentUser;
     	let currentGame:any = {
-    		creator: {uid: user.uid, displayName: this.auth.getdisplayName},
+    		creator: {uid: this.auth.getUserUid(), displayName: this.auth.getdisplayName()},
     		// joiner: null,
     		state: 1 // open
     	};
     	this.ref.push().set(currentGame);
-      this.created = !this.created;
+      this.alreadyCreated = !this.alreadyCreated;
     }
   }
 
