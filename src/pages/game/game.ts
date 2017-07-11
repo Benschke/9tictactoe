@@ -18,7 +18,9 @@ export class GamePage {
 	index = [[0,1,2],[3,4,5],[6,7,8]]; // feld zeichen hilfe
 	index2= [0,1,2];
   constructor(public navCtrl: NavController, public navParams: NavParams,public gameService: GameServiceProvider, public gameStatus: GamestatusProvider) {
-     gameStatus.gameType = this.navParams.get('type');
+     if(this.navParams.get('type')) gameStatus.gameType = this.navParams.get('type');
+     console.log("GamePage.ts");
+     console.log("GameType(0: Bot, 1: Local MP, 2: Global MP): " + gameStatus.gameType);
   }
 
   isPossibleField(v: number){

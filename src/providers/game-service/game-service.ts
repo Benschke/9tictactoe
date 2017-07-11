@@ -87,6 +87,15 @@ export class GameServiceProvider {
 		return this.localMP(x,y,z);
 	}
 
+	globalMP(x,y,z){
+		console.log("Symbol: " + this.gameStatus.symbol);
+		console.log("Turn:   " + this.gameStatus.turn);
+		if(this.gameStatus.symbol == this.gameStatus.turn){
+			this.localMP(x,y,z);
+			this.gameStatus.update();
+		}
+	}
+
 	localMP(x,y,z){
 		/* wenn schon belegt | falsches feld | nicht sein spielzug*/
 		if(this.gameStatus.fields[x][y][z] != 0 || !this.validField(x)|| !this.is_Turn()) return false;
@@ -136,7 +145,7 @@ export class GameServiceProvider {
 				break;
 			}
 			case 2: {
-				//statements;
+				this.globalMP(x,y,z);
 				break;
 			}
 		} 
