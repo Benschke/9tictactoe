@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
 import { HomePage } from '../../pages/home/home';
+import {webClientIdGooglePlusApi} from '../../environment';
 
 // import { Component } from '@angular/core';
 //import { IonicPage, NavController, NavParams } from 'ionic-angular';
@@ -25,7 +26,7 @@ export class AuthProvider {
   }
   signInGoogle(){
   	this.googleplus.login({
-      'webClientId' : '495290538261-97tkujbj8pq8slcs0j8ptp5e9692a0l1.apps.googleusercontent.com',
+      'webClientId' : webClientIdGooglePlusApi,
       'offline' : true
     })
   	.then((res)=>{

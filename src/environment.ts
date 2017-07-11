@@ -6,3 +6,4 @@ export const firebaseConfig  = {
   storageBucket: "tictactoe-440b3.appspot.com",
   messagingSenderId: "495290538261"
 };
+export const webClientIdGooglePlusApi = '495290538261-97tkujbj8pq8slcs0j8ptp5e9692a0l1.apps.googleusercontent.com';

@@ -11,6 +11,7 @@ import { HomePage } from '../pages/home/home';
 import { GamePage } from '../pages/game/game';
 import { LoginPage } from '../pages/login/login';
 import { LobbyPage } from '../pages/lobby/lobby';
+import { TestPage } from '../pages/test/test';
 
 import { BotProvider } from '../providers/bot/bot';
 import { GameServiceProvider } from '../providers/game-service/game-service';
@@ -34,7 +35,8 @@ firebase.initializeApp(firebaseConfig);
     HomePage,
     GamePage,
     LoginPage,
-    LobbyPage
+    LobbyPage,
+    TestPage
   ],
   imports: [
     BrowserModule,
@@ -50,7 +52,8 @@ firebase.initializeApp(firebaseConfig);
     HomePage,
     GamePage,
     LoginPage,
-    LobbyPage
+    LobbyPage,
+    TestPage
   ],
   providers: [
     StatusBar,

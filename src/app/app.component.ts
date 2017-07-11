@@ -7,7 +7,7 @@ import { GameServiceProvider } from '../providers/game-service/game-service';
 
 
 import { LoginPage } from '../pages/login/login';
-// import { HomePage } from '../pages/home/home';
+
 @Component({
   templateUrl: 'app.html',
   providers: [GameServiceProvider,BotProvider]
