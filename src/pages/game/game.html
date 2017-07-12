@@ -5,7 +5,6 @@ felder zum anklicken sollen alle gleichgroß sein egal was für inhalt sie haben
 die 9 tetris felder füllen schon den screen aus
 
 -->
-
 <ion-content padding>
     <ion-grid [ngClass]="getPlayerTurnClass()">
         <ion-row *ngFor="let tetrisIndex of index; let r = index; trackBy: trackByFn">
@@ -17,11 +16,14 @@ die 9 tetris felder füllen schon den screen aus
                                 <span class="ctr tile-text" [ngClass]="{'player1':gameStatus.fields[x][y][z]==1,'player2': gameStatus.fields[x][y][z]==2}">{{(gameStatus.fields[x][y][z]==0)? ' ': ((gameStatus.fields[x][y][z]==1)? 'x' : 'o')}}</span>
                             </div>
                         </ion-col>
-                    </ion-row>        
+                    </ion-row>
                 </div>
             </ion-col>
         </ion-row>
     </ion-grid>
+    <div *ngIf="gameService.isGameOver()">
+        <br>
+        <button ion-button (click)="btnRestartGame()" full block>Restart Game</button>
+        <button ion-button (click)="btnReturn()" full block>Return</button>
+    </div>
 </ion-content>
-
-{{gameStatus.players}}

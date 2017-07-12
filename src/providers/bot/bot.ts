@@ -1,4 +1,4 @@
-import { Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 // import { Component } from '@angular/core';
 import { GamestatusProvider } from '../gamestatus/gamestatus';
 /*
@@ -11,92 +11,90 @@ import { GamestatusProvider } from '../gamestatus/gamestatus';
 @Injectable()
 export class BotProvider {
 	public gameStatus: GamestatusProvider; /* damit game-service und der bot das selbe feld benutzen */
-	constructor() {}
+	constructor() { }
 
-	copyArray(ar){
+	copyArray(ar) {
 		return ar.slice(0);
 	}
 
-	isWin(fieldNumber, symbol){
+	isWin(fieldNumber, symbol) {
 		// wenn direkter spielzug == win
 		// symbol 1 spieler 2 bot
-		let tmp: any = [0,1,2]
+		let tmp: any = [0, 1, 2]
 		let field: any = this.gameStatus.fields[fieldNumber];
-		
+
 		/* kreuz */
-		if(field[0][0]==0&&field[1][1]==symbol&&field[2][2]==symbol) return [fieldNumber,0,0];
-		if(field[0][0]==symbol&&field[1][1]==0&&field[2][2]==symbol) return [fieldNumber,1,1];
-		if(field[0][0]==symbol&&field[1][1]==symbol&&field[2][2]==0) return [fieldNumber,2,2];
+		if (field[0][0] == 0 && field[1][1] == symbol && field[2][2] == symbol) return [fieldNumber, 0, 0];
+		if (field[0][0] == symbol && field[1][1] == 0 && field[2][2] == symbol) return [fieldNumber, 1, 1];
+		if (field[0][0] == symbol && field[1][1] == symbol && field[2][2] == 0) return [fieldNumber, 2, 2];
 
-		if(field[0][2]==0&&field[1][1]==symbol&&field[2][0]==symbol) return [fieldNumber,0,2];
-		if(field[0][2]==symbol&&field[1][1]==0&&field[2][0]==symbol) return [fieldNumber,1,1];
-		if(field[0][2]==symbol&&field[1][1]==symbol&&field[2][0]==0) return [fieldNumber,2,0];	
+		if (field[0][2] == 0 && field[1][1] == symbol && field[2][0] == symbol) return [fieldNumber, 0, 2];
+		if (field[0][2] == symbol && field[1][1] == 0 && field[2][0] == symbol) return [fieldNumber, 1, 1];
+		if (field[0][2] == symbol && field[1][1] == symbol && field[2][0] == 0) return [fieldNumber, 2, 0];
 
-		for(let i of tmp){
+		for (let i of tmp) {
 			/* horizontal */
-			if(field[0][i]==symbol&&field[1][i]==symbol&&field[2][i]==0) return [fieldNumber,2,i];
-			if(field[0][i]==symbol&&field[1][i]==0&&field[2][i]==symbol) return [fieldNumber,1,i];
-			if(field[0][i]==0&&field[1][i]==symbol&&field[2][i]==symbol) return [fieldNumber,0,i];			
+			if (field[0][i] == symbol && field[1][i] == symbol && field[2][i] == 0) return [fieldNumber, 2, i];
+			if (field[0][i] == symbol && field[1][i] == 0 && field[2][i] == symbol) return [fieldNumber, 1, i];
+			if (field[0][i] == 0 && field[1][i] == symbol && field[2][i] == symbol) return [fieldNumber, 0, i];
 			/* vertikal */
-			if(field[i][0]==0&&field[i][1]==symbol&&field[i][2]==symbol) return [fieldNumber,i,0];
-			if(field[i][0]==symbol&&field[i][1]==0&&field[i][2]==symbol) return [fieldNumber,i,1];
-			if(field[i][0]==symbol&&field[i][1]==symbol&&field[i][2]==0) return [fieldNumber,i,2];	
+			if (field[i][0] == 0 && field[i][1] == symbol && field[i][2] == symbol) return [fieldNumber, i, 0];
+			if (field[i][0] == symbol && field[i][1] == 0 && field[i][2] == symbol) return [fieldNumber, i, 1];
+			if (field[i][0] == symbol && field[i][1] == symbol && field[i][2] == 0) return [fieldNumber, i, 2];
 		}
 		return false;
 
 	}
 
-	nextRoundnoWin(possibleChoices){
-		let tetris : any = [[0,1,2],
-						  	[3,4,5],
- 							[6,7,8]];
-		for(let fieldNumber of possibleChoices){
+	nextRoundnoWin(possibleChoices) {
+		let tetris: any = [[0, 1, 2],
+		[3, 4, 5],
+		[6, 7, 8]];
+		for (let fieldNumber of possibleChoices) {
 			let x: number = 0;
-			for(let fieldRow of this.gameStatus.fields[fieldNumber]){
+			for (let fieldRow of this.gameStatus.fields[fieldNumber]) {
 				let y: number = 0;
-				for(let tile of fieldRow){
+				for (let tile of fieldRow) {
 					/* feld wo im nächsten zug kein win möglich ist*/
-					if(tile==0&&!this.isWin(tetris[x][y], 1)) return [fieldNumber,x,y];
+					if (tile == 0 && !this.isWin(tetris[x][y], 1)) return [fieldNumber, x, y];
 					++y;
 				}
 				++x;
 			}
-			
+
 		}
 
 	}
 
-	randomTile(possibleChoices){
+	randomTile(possibleChoices) {
 		/* todo wenn kein zug mehr möglich iwas checken solange so */
-		if(!possibleChoices||possibleChoices.length < 0) return null;
-		let randomField: number = possibleChoices[Math.floor(Math.random()*possibleChoices.length)];
+		if (!possibleChoices || possibleChoices.length < 0) return null;
+		let randomField: number = possibleChoices[Math.floor(Math.random() * possibleChoices.length)];
 		let x: number = 0;
-		for(let row of this.gameStatus.fields[randomField]){
-			let y: number = 0; 
-			for(let tile of row){
-				if(tile == 0) return [randomField, x,y];
+		for (let row of this.gameStatus.fields[randomField]) {
+			let y: number = 0;
+			for (let tile of row) {
+				if (tile == 0) return [randomField, x, y];
 				++y;
 			}
 			++x;
 		}
 	}
 
-	getChoice(){
+	getChoice() {
 		/* wenn möglich zu gewinnen gewinn das feld */
-		let possibleChoices: any =  this.copyArray(this.gameStatus.nextfield);
+		let possibleChoices: any = this.copyArray(this.gameStatus.nextfield);
 		/* ein feld gewinnbar? */
-		for(let fieldNumber of possibleChoices){			
+		for (let fieldNumber of possibleChoices) {
 			var tmp: any = this.isWin(fieldNumber, 2);
-			if(tmp) return tmp;
+			if (tmp) return tmp;
 		}
 		/* nächsterZug kein Punkt für Gegner */
 		let tmp2: any = this.nextRoundnoWin(possibleChoices);
-		if(tmp2) return tmp2;
-		
+		if (tmp2) return tmp2;
 
 		/* random */
-		return(this.randomTile(possibleChoices));
-		
+		return (this.randomTile(possibleChoices));
 	}
 
 }

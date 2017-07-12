@@ -9,7 +9,6 @@ import 'rxjs/add/operator/map';
 */
 @Injectable()
 export class PlayerProvider {
-	public name: string =null;
-  constructor() {}
-
+  public name: string = null;
+  constructor() { }
 }

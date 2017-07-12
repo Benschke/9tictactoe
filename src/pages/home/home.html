@@ -1,14 +1,8 @@
-<ion-header>
-    <ion-navbar>
-        <ion-title>
-            Hello {{user}}!
-        </ion-title>
-    </ion-navbar>
-</ion-header> 
 <ion-content padding class="ctr">
     <button ion-button full [navPush]="gamePage" [navParams]="{ type: 0}">Botgame</button>
     <button ion-button full [navPush]="gamePage" [navParams]="{ type: 1}">2v2 - Local</button>
     <button ion-button full [navPush]="lobbyPage" [navParams]="{ type: 2}">2v2 - Multiplayer</button>
+    <button ion-button full [navPush]="rulesPage">Rules</button>    
 </ion-content>
 <!--
 /* 0 Bot, 1 MP Local, 2 MP Online*/

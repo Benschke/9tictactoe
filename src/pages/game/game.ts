@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { GameServiceProvider } from '../../providers/game-service/game-service';
 import { GamestatusProvider } from '../../providers/gamestatus/gamestatus';
+import { HomePage } from '../home/home';
 /**
  * Generated class for the GamePage page.
  *
@@ -18,9 +19,8 @@ export class GamePage {
 	index = [[0,1,2],[3,4,5],[6,7,8]]; // feld zeichen hilfe
 	index2= [0,1,2];
   constructor(public navCtrl: NavController, public navParams: NavParams,public gameService: GameServiceProvider, public gameStatus: GamestatusProvider) {
-     if(this.navParams.get('type')) gameStatus.gameType = this.navParams.get('type');
-     console.log("GamePage.ts");
-     console.log("GameType(0: Bot, 1: Local MP, 2: Global MP): " + gameStatus.gameType);
+    gameStatus.resett();
+     if(typeof this.navParams.get('type') != 'undefined') gameStatus.gameType = this.navParams.get('type');
   }
 
   isPossibleField(v: number){
@@ -43,12 +43,19 @@ export class GamePage {
     return "player2_border";  
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad GamePage');
-  }
+  ionViewDidLoad() {  }
   playerClick(x,y,z){
-	 // console.log("x = " + x + ", y = " + y + ", z = " + z);    
     this.gameService.playerClick(x,y,z);
+  }
+  btnRestartGame(){
+    if(this.gameStatus.gameType == 0 || this.gameStatus.gameType == 1) this.gameStatus.resett();
+    //else iwas wegen mit mp online
+  }
+  
+  btnReturn(){
+    if(this.gameStatus.gameType == 0 || this.gameStatus.gameType == 1) this.gameStatus.resett();
+    //else iwas wegen mit mp online
+    this.navCtrl.push(HomePage);
   }
 
 }

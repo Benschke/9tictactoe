@@ -10,10 +10,10 @@ import { LoginPage } from '../pages/login/login';
 
 @Component({
   templateUrl: 'app.html',
-  providers: [GameServiceProvider,BotProvider]
+  providers: [GameServiceProvider, BotProvider]
 })
 export class MyApp {
-  rootPage:any = LoginPage;
+  rootPage: any = LoginPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {

@@ -13,4 +13,4 @@ import { GamePage } from './game';
     GamePage
   ]
 })
-export class GamePageModule {}
+export class GamePageModule { }

@@ -11,7 +11,7 @@ import { HomePage } from '../pages/home/home';
 import { GamePage } from '../pages/game/game';
 import { LoginPage } from '../pages/login/login';
 import { LobbyPage } from '../pages/lobby/lobby';
-import { TestPage } from '../pages/test/test';
+import { RulesPage } from '../pages/rules/rules';
 
 import { BotProvider } from '../providers/bot/bot';
 import { GameServiceProvider } from '../providers/game-service/game-service';
@@ -23,7 +23,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 // Do not import from 'firebase' as you'll lose the tree shaking benefits
 import * as firebase from 'firebase/app';
 //import firebase from 'firebase';
-import {firebaseConfig} from '../environment';
+import { firebaseConfig } from '../environment';
 import { PlayerProvider } from '../providers/player/player';
 import { AuthProvider } from '../providers/auth/auth';
 
@@ -36,15 +36,15 @@ firebase.initializeApp(firebaseConfig);
     GamePage,
     LoginPage,
     LobbyPage,
-    TestPage
+    RulesPage
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
     MaterialModule,
     AngularFireModule.initializeApp(firebaseConfig, '9tictactoe'),
-    AngularFireDatabaseModule, 
-    AngularFireAuthModule, 
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -53,13 +53,13 @@ firebase.initializeApp(firebaseConfig);
     GamePage,
     LoginPage,
     LobbyPage,
-    TestPage
+    RulesPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     GooglePlus,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
     BotProvider,
     GameServiceProvider,
     GamestatusProvider,
@@ -67,4 +67,4 @@ firebase.initializeApp(firebaseConfig);
     AuthProvider
   ]
 })
-export class AppModule {}
+export class AppModule { }
