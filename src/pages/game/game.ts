@@ -3,12 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { GameServiceProvider } from '../../providers/game-service/game-service';
 import { GamestatusProvider } from '../../providers/gamestatus/gamestatus';
 import { HomePage } from '../home/home';
-/**
- * Generated class for the GamePage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
+
 @IonicPage()
 @Component({
   selector: 'page-game',
@@ -18,9 +13,15 @@ import { HomePage } from '../home/home';
 export class GamePage {
 	index = [[0,1,2],[3,4,5],[6,7,8]]; // feld zeichen hilfe
 	index2= [0,1,2];
-  constructor(public navCtrl: NavController, public navParams: NavParams,public gameService: GameServiceProvider, public gameStatus: GamestatusProvider) {
+  constructor(public navCtrl: NavController, 
+              public navParams: NavParams,
+              public gameService: GameServiceProvider, 
+              public gameStatus: GamestatusProvider) {
     gameStatus.resett();
+    gameService.gamePage=this;
      if(typeof this.navParams.get('type') != 'undefined') gameStatus.gameType = this.navParams.get('type');
+     else gameStatus.gameType = 2;
+     if(gameStatus.gameType==1) gameStatus.players[1].name = "Guest2";
   }
 
   isPossibleField(v: number):boolean{

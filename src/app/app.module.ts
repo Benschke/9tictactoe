@@ -44,7 +44,7 @@ firebase.initializeApp(firebaseConfig);
     MaterialModule,
     AngularFireModule.initializeApp(firebaseConfig, '9tictactoe'),
     AngularFireDatabaseModule,
-    AngularFireAuthModule,
+    AngularFireAuthModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

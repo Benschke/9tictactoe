@@ -1,16 +1,10 @@
 import { Injectable } from '@angular/core';
-// import { Component } from '@angular/core';
 import { BotProvider } from '../bot/bot';
 import { GamestatusProvider } from '../gamestatus/gamestatus';
 
-/*
-  Generated class for the GameServiceProvider provider.
-
-  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-  for more info on providers and Angular DI.
-*/
 @Injectable()
 export class GameServiceProvider {
+	gamePage:any;
 	constructor(public bot: BotProvider, public gameStatus: GamestatusProvider) {
 		this.bot.gameStatus = gameStatus;
 	}

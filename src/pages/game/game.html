@@ -26,4 +26,12 @@ die 9 tetris felder füllen schon den screen aus
         <button ion-button (click)="btnRestartGame()" full block>Restart Game</button>
         <button ion-button (click)="btnReturn()" full block>Return</button>
     </div>
+
+    <div *ngIf="!gameService.isGameOver()&&gameStatus.gameType&&gameStatus.symbol==gameStatus.turn" class="ctr tile-text"><br><strong>Your turn!</strong><br></div>
+    <div *ngIf="!gameService.isGameOver()&&gameStatus.gameType!=2" class="ctr tile-text" [ngClass]="{'player1': gameStatus.turn,'player2': !gameStatus.turn}"><br><strong>{{gameStatus.turn? gameStatus.players[0].name : gameStatus.players[1].name}}'s turn!</strong><br></div>
+    <ion-footer>
+        <ion-toolbar>
+            <ion-title>Footer</ion-title>
+        </ion-toolbar>
+    </ion-footer>
 </ion-content>
