@@ -20,22 +20,22 @@ export class GamestatusProvider {
 	fields: any = this.initField();
 	nextfield: any = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 	constructor(public player: PlayerProvider) { }
-	resett() {
+	resett():void{
 		this.won_fields = this.initWon_Fields();
 		this.fields = this.initField();
 		this.nextfield = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 	}
-	updateTurn(turn) {
+	updateTurn(turn):void{
 		if (typeof (turn) != "undefined" && this.turn != turn) this.turn = turn; // sonst ist turn immer true weil if(false) direkt returnen würde
 	}
-	updatewon_Fields(wFs) {
+	updatewon_Fields(wFs):void{
 		if (!wFs) return;
 		let iAr: any = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 		for (let i of iAr) {
 			if (wFs[i] != this.won_fields[i]) this.won_fields[i] = wFs[i];
 		}
 	}
-	updateFields(fields) {
+	updateFields(fields):void{
 		if (!fields) return;
 		let xAr: any = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 		let yzAr: any = [0, 1, 2];
@@ -47,14 +47,14 @@ export class GamestatusProvider {
 			}
 		}
 	}
-	updateNextField(nf) {
+	updateNextField(nf):void{
 		if (!nf) return;
 		let iAr: any = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 		for (let i of iAr) {
 			if (this.nextfield[i] != nf[i]) this.nextfield[i] = nf[i];
 		}
 	}
-	initMultiplayer(key) {
+	initMultiplayer(key):void{
 		this.key = key;
 		this.resett();
 		const query = firebase.database().ref("/games").child(key);
@@ -66,7 +66,7 @@ export class GamestatusProvider {
 		});
 	}
 
-	update() {
+	update():void{
 		if (!this.key) return;
 		const query = firebase.database().ref("/games").child(this.key);
 		query.update({
@@ -76,10 +76,10 @@ export class GamestatusProvider {
 			nextField: this.nextfield
 		});
 	}
-	initField() {
+	initField():any{
 		return [[[0, 0, 0], [0, 0, 0], [0, 0, 0]], [[0, 0, 0], [0, 0, 0], [0, 0, 0]], [[0, 0, 0], [0, 0, 0], [0, 0, 0]], [[0, 0, 0], [0, 0, 0], [0, 0, 0]], [[0, 0, 0], [0, 0, 0], [0, 0, 0]], [[0, 0, 0], [0, 0, 0], [0, 0, 0]], [[0, 0, 0], [0, 0, 0], [0, 0, 0]], [[0, 0, 0], [0, 0, 0], [0, 0, 0]], [[0, 0, 0], [0, 0, 0], [0, 0, 0]]];
 	}
-	initWon_Fields() {
+	initWon_Fields():any{
 		return [false, false, false, false, false, false, false, false, false];
 	}
 

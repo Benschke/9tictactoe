@@ -37,13 +37,13 @@ export class LoginPage {
   }
 
   ionViewDidLoad() { }
-  anonAuth() {
+  anonAuth():void{
     this.auth.signInAnonym();
   }
-  googleAuth() {
+  googleAuth():void{
     this.auth.signInGoogle();
   }
-  clearFirebase(){
+  clearFirebase():void{
     //wenn multiplayer und nicht created == z.b. handy neu gestartet lobby löschen
     //damit die trigger funken
     if(!this.firstEnterd){

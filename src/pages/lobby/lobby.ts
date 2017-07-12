@@ -38,7 +38,7 @@ export class LobbyPage {
   }
   ionViewDidLoad() {}
 
-  enterGame(playerturn, key) {
+  enterGame(playerturn, key):void{
     const query = this.ref.child(key);
     query.once('value', snap => {
       this.gameStatus.initMultiplayer(key);
@@ -59,7 +59,7 @@ export class LobbyPage {
     /* playerturn  true == ersteller, joiner == false */
   }
 
-  createLobby() {
+  createLobby() : void{
     let currentGame: any = {
       creator_uid: this.auth.getUserUid(),
       creator_displayName: this.auth.getdisplayName(),
@@ -83,7 +83,7 @@ export class LobbyPage {
 
   }
 
-  createGame() {
+  createGame():void{
     const query0 = this.ref.orderByChild('state_creator_uid').equalTo("1_" + this.auth.getUserUid()).limitToFirst(1);
     query0.once('value', snap => {
       if (!snap.val()) this.createLobby();
@@ -91,7 +91,7 @@ export class LobbyPage {
     });
   }
 
-  joinGame(key) {
+  joinGame(key):void{
     let gameRef: any = this.ref.child(key);
     gameRef.once('value', snap => {
       if (snap.val().creator_uid != this.auth.getUserUid()) {

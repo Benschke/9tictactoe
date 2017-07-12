@@ -8,10 +8,10 @@ import { GamestatusProvider } from '../../providers/gamestatus/gamestatus';
 @Injectable()
 export class AuthProvider {
   constructor(public googleplus: GooglePlus, public gameStatus: GamestatusProvider) { }
-  signInAnonym() {
+  signInAnonym():void{
     firebase.auth().signInAnonymously();
   }
-  signInGoogle() {
+  signInGoogle():void{
     this.googleplus.login({
       'webClientId': webClientIdGooglePlusApi,
       'offline': true
@@ -29,19 +29,19 @@ export class AuthProvider {
       });
   }
 
-  signOut() {
+  signOut():void{
     firebase.auth().signOut();
   }
 
-  getcurrentUser() {
+  getcurrentUser():any{
     return firebase.auth().currentUser;
   }
-  getdisplayName() {
+  getdisplayName():string{
     //return (firebase.auth().currentUser.isAnonymous) ? "Guest-" + firebase.auth().currentUser.uid : firebase.auth().currentUser.displayName;
     return (firebase.auth().currentUser.isAnonymous) ? "Guest" : firebase.auth().currentUser.displayName;
   }
 
-  getUserUid() {
+  getUserUid():string{
     return this.getcurrentUser().uid;
   }
 }

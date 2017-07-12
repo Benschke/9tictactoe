@@ -15,21 +15,21 @@ export class GameServiceProvider {
 		this.bot.gameStatus = gameStatus;
 	}
 
-	isGameOver() {
+	isGameOver():boolean{
 		return this.gameStatus.nextfield.length == 0;
 	}
 
-	is_Turn() {
+	is_Turn():boolean{
 		/* TODO */
 		return true;
 	}
-	validField(x) {
+	validField(x):boolean{
 		for (let entry of this.gameStatus.nextfield) {
 			if (entry == x) return true
 		}
 		return false;
 	}
-	isFieldFull(field: number) {
+	isFieldFull(field: number):boolean{
 		for (let fieldtmp of this.gameStatus.fields[field]) {
 			for (let element of fieldtmp)
 				if (element == 0) return false;
@@ -37,7 +37,7 @@ export class GameServiceProvider {
 		return true;
 	}
 	/* gültige felder für nächsten zug basierend auf aktuellen zug */
-	setvalidFields(y, z) {
+	setvalidFields(y, z):void{
 		this.gameStatus.nextfield = [];
 		let tetris: any = [[0, 1, 2],
 		[3, 4, 5],
@@ -58,7 +58,7 @@ export class GameServiceProvider {
 			this.gameStatus.nextfield = [nextMove];
 		}
 	}
-	isFull(x) {
+	isFull(x):boolean{
 		let field: any = this.gameStatus.fields[x];
 		for (let row of field) {
 			for (let tile of row) {
@@ -67,7 +67,7 @@ export class GameServiceProvider {
 		}
 		return true;
 	}
-	isWin(x, y, z) {
+	isWin(x, y, z):boolean{
 		let symbol: number = (this.gameStatus.turn) ? 1 : 2;
 		let field: any = this.gameStatus.fields[x];
 		let tmp: any = [0, 1, 2]
@@ -86,17 +86,17 @@ export class GameServiceProvider {
 		return false;
 	}
 
-	PlayerClick(x, y, z) {
+	PlayerClick(x, y, z) : boolean  {
 		return this.localMP(x, y, z);
 	}
 
-	globalMP(x, y, z) {
+	globalMP(x, y, z) : void {
 		if (this.gameStatus.symbol == this.gameStatus.turn) {
 			if(this.localMP(x, y, z)) this.gameStatus.update();
 		}
 	}
 
-	localMP(x, y, z) {
+	localMP(x, y, z) : boolean {
 		/* wenn schon belegt | falsches feld | nicht sein spielzug*/
 		if (this.gameStatus.fields[x][y][z] != 0 || !this.validField(x) || !this.is_Turn()) return false;
 		let symbol: number;
@@ -119,13 +119,13 @@ export class GameServiceProvider {
 		this.gameStatus.turn = !this.gameStatus.turn;
 		return true;
 	}
-	gameOver() {
+	gameOver():boolean{
 		for (let isFieldWon of this.gameStatus.won_fields) {
 			if (!isFieldWon) return false;
 		}
 		return true;
 	}
-	playerClick(x, y, z) {
+	playerClick(x, y, z):void{
 		switch (this.gameStatus.gameType) {
 			case 0: {
 				/* Spieler */

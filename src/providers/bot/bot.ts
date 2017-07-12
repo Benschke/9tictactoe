@@ -13,11 +13,11 @@ export class BotProvider {
 	public gameStatus: GamestatusProvider; /* damit game-service und der bot das selbe feld benutzen */
 	constructor() { }
 
-	copyArray(ar) {
+	copyArray(ar):any{
 		return ar.slice(0);
 	}
 
-	isWin(fieldNumber, symbol) {
+	isWin(fieldNumber, symbol):any {
 		// wenn direkter spielzug == win
 		// symbol 1 spieler 2 bot
 		let tmp: any = [0, 1, 2]
@@ -46,7 +46,7 @@ export class BotProvider {
 
 	}
 
-	nextRoundnoWin(possibleChoices) {
+	nextRoundnoWin(possibleChoices):any{
 		let tetris: any = [[0, 1, 2],
 		[3, 4, 5],
 		[6, 7, 8]];
@@ -66,7 +66,7 @@ export class BotProvider {
 
 	}
 
-	randomTile(possibleChoices) {
+	randomTile(possibleChoices):any{
 		/* todo wenn kein zug mehr möglich iwas checken solange so */
 		if (!possibleChoices || possibleChoices.length < 0) return null;
 		let randomField: number = possibleChoices[Math.floor(Math.random() * possibleChoices.length)];
@@ -81,7 +81,7 @@ export class BotProvider {
 		}
 	}
 
-	getChoice() {
+	getChoice():any{
 		/* wenn möglich zu gewinnen gewinn das feld */
 		let possibleChoices: any = this.copyArray(this.gameStatus.nextfield);
 		/* ein feld gewinnbar? */
