@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { GameServiceProvider } from '../../providers/game-service/game-service';
 import { GamestatusProvider } from '../../providers/gamestatus/gamestatus';
 import { HomePage } from '../home/home';
-
+import { ApplicationRef } from '@angular/core';
 @IonicPage()
 @Component({
   selector: 'page-game',
@@ -16,7 +16,8 @@ export class GamePage {
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
               public gameService: GameServiceProvider, 
-              public gameStatus: GamestatusProvider) {
+              public gameStatus: GamestatusProvider,
+              private _applicationRef : ApplicationRef) {
     gameStatus.resett();
     gameService.gamePage=this;
      if(typeof this.navParams.get('type') != 'undefined') gameStatus.gameType = this.navParams.get('type');
