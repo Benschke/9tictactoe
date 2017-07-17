@@ -89,5 +89,12 @@ export class GamestatusProvider {
 	initWon_Fields(): any {
 		return [false, false, false, false, false, false, false, false, false];
 	}
+	getScore(symbol):number{
+		let counter:number=  0;
+		for(let field of this.won_fields){
+			if(field == symbol) ++counter;
+		}
+		return counter;
+	}
 
 }

@@ -19,13 +19,12 @@ export class AuthProvider {
       .then((res) => {
         const firecreds = firebase.auth.GoogleAuthProvider.credential(res.idToken);
         firebase.auth().signInWithCredential(firecreds).then((success) => {
-          return true;
+          return;
         }).catch((err) => {
           alert('Firebase auth failed ' + err);
         })
       }).catch((err) => {
         alert('Error:' + err);
-        return false;
       });
   }
 
