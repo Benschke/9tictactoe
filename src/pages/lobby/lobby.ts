@@ -1,13 +1,9 @@
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { Component,NgZone } from '@angular/core';
-// import { Observable } from 'rxjs/Observable';
+import { Component, NgZone } from '@angular/core';
 import { GamePage } from '../game/game';
 import { GamestatusProvider } from '../../providers/gamestatus/gamestatus';
-
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
-import * as firebase from 'firebase/app';
-
 import { AuthProvider } from '../../providers/auth/auth';
+import { FirebaseProvider } from '../../providers/firebase/firebase';
 
 /**
  * Generated class for the LobbyPage page.
@@ -23,89 +19,79 @@ import { AuthProvider } from '../../providers/auth/auth';
 export class LobbyPage {
   created: boolean = false;
   lobbys = [];
-  fireDB = firebase.database();
-  ref = firebase.database().ref("/games");
   gameType;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public db: AngularFireDatabase, public auth: AuthProvider, public gameStatus: GamestatusProvider, public zone: NgZone) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public db: FirebaseProvider, public auth: AuthProvider, public gameStatus: GamestatusProvider, public zone: NgZone) {
     this.gameType = this.navParams.get('type');
-    this.initLobbys();   
   }
-  ionViewDidLoad() {}
+  ionViewDidLoad() { }
 
-  initLobbys(){
-    const query: any = this.ref.orderByChild("state").equalTo(1);
-    query.on('child_added', (snap)=>{
-      this.zone.run(()=>{
-        this.lobbys.push({key: snap.getKey(), name: snap.val().creator_displayName});
-      });      
+  ionViewWillEnter() {
+    this.db.listenToOpenLobbys();
+    this.db.openLobbys.subscribe((snap) => {
+      this.zone.run(() => {
+        this.lobbys.push({ key: snap.getKey(), name: snap.val().creator_displayName });
+      });
+    }, (err) => {
+      alert("Lobby - ionViewWillEnter(): " + err);
     });
   }
+  ionViewWillLeave() {
+    this.db.stopListenToOpenLobbys();
+  }
 
-  enterGame(playerturn, key):void{
-    const query = this.ref.child(key);
-    query.once('value', snap => {
-      this.gameStatus.initMultiplayer(key);
-      this.gameStatus.gameType = 2;
-      this.gameStatus.players[0].name = snap.val().creator_displayName;
-      this.gameStatus.players[1].name = snap.val().joiner_displayName;
-      this.gameStatus.symbol = playerturn;
-      if (playerturn) {
-        query.update({
-          turn: true,
-          won_fields: this.gameStatus.won_fields,
-          fields: this.gameStatus.fields,
-          nextField: this.gameStatus.nextfield
-        });
+  enterGame(playerturn, key): void {
+    /* playerturn  true == (Lobby)ersteller, joiner == false */
+    let setupInfos: any = (playerturn) ? { // nur ersteller init die lobby in firebase
+      turn: true,
+      won_fields: this.gameStatus.won_fields,
+      fields: this.gameStatus.fields,
+      nextField: this.gameStatus.nextfield
+    } : false;
+    this.db.setUpLobby(key, setupInfos)
+      .then((snap: any) => {
+        this.gameStatus.initMultiplayer(key);
+        this.gameStatus.gameType = 2;
+        this.gameStatus.players[0].name = snap.val().creator_displayName;
+        this.gameStatus.players[1].name = snap.val().joiner_displayName;
+        this.gameStatus.symbol = playerturn;
         this.navCtrl.push(GamePage);
-      } else this.navCtrl.push(GamePage);
-    });
-    /* playerturn  true == ersteller, joiner == false */
+      })
+      .catch((err) => {
+        alert("Lobby enterGame: " + err);
+      })
+
   }
 
-  createLobby() : void{
-    let currentGame: any = {
+  createLobby(): void {
+    const lobbyInfos = {
       creator_uid: this.auth.getUserUid(),
       creator_displayName: this.auth.getdisplayName(),
-      // joiner: null,
       state: 1, // open
-      state_creator_uid: "1_" + this.auth.getUserUid() //für uniqueLobby || quelle: https://www.youtube.com/watch?v=sKFLI5FOOHs&feature=youtu.be
+      state_creator_uid: "1_" + this.auth.getUserUid() //für uniqueLobby || quelle: https://www.youtube.com/watch?v=sKFLI5FOOHs&feature=youtu.be})
     };
-    this.ref.push().set(currentGame);
-
-    // id bekommen ^
-    const query = this.ref.orderByChild('state_creator_uid').equalTo("1_" + this.auth.getUserUid()).limitToFirst(1);
-    query.once('value', snap => {
-      let key: string = Object.keys(snap.val())[0];
-      const query2 = this.ref.child(key);
-      query2.on('value', snap2 => {
-        if (snap2.val().nextField) return; // dann wurde das spiel schon init 
-        if (snap2.val().state == 2) this.enterGame(true, key);
-      });
-
-    });
-
-  }
-
-  createGame():void{
-    const query0 = this.ref.orderByChild('state_creator_uid').equalTo("1_" + this.auth.getUserUid()).limitToFirst(1);
-    query0.once('value', snap => {
-      if (!snap.val()) this.createLobby();
-      else alert("Just one Lobby per Person");
-    });
-  }
-
-  joinGame(key):void{
-    let gameRef: any = this.ref.child(key);
-    gameRef.once('value', snap => {
-      if (snap.val().creator_uid != this.auth.getUserUid()) {
-        gameRef.update({
-          joiner_uid: this.auth.getUserUid(),
-          joiner_displayName: this.auth.getdisplayName(),
-          state: 2
+    this.db.createLobby(lobbyInfos).then((key) => { 
+      this.db.joinedLobby.subscribe((snap) => {
+        if (snap) this.enterGame(true, key); // wird aufgerufen wenn jemand der lobby beitritt 
+      },
+        (err) => {
+          console.log("createLobby: " + err);
         });
-        this.enterGame(false, key);
-      } else alert("Cant join own Lobby!");
+      this.db.waitLobby(key); // listener starten ^ 
     });
+  }
+
+  createGame(): void {
+    this.db.isUniqueLobby().then(snap=>{
+      this.createLobby();
+    }).catch(err=>{
+      alert("Just one Lobby per Person");
+    });
+  }
+
+  joinGame(key): void {
+    this.db.joinLobby(key)
+    .then(()=>this.enterGame(false, key))
+    .catch((err)=>alert(err));
   }
 
 }

@@ -26,6 +26,7 @@ import * as firebase from 'firebase/app';
 import { firebaseConfig } from '../environment';
 import { PlayerProvider } from '../providers/player/player';
 import { AuthProvider } from '../providers/auth/auth';
+import { FirebaseProvider } from '../providers/firebase/firebase';
 
 firebase.initializeApp(firebaseConfig);
 
@@ -64,7 +65,8 @@ firebase.initializeApp(firebaseConfig);
     GameServiceProvider,
     GamestatusProvider,
     PlayerProvider,
-    AuthProvider
+    AuthProvider,
+    FirebaseProvider
   ]
 })
 export class AppModule { }
