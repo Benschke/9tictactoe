@@ -89,6 +89,12 @@ export class BotProvider {
 			var tmp: any = this.isWin(fieldNumber, 2);
 			if (tmp) return tmp;
 		}
+		/* win gegner abwehren */
+		for(let fieldNumber of possibleChoices){
+			var tmp: any = this.isWin(fieldNumber, 1); // 1 spieler 2 bot
+			if(tmp) return tmp;
+		}
+		
 		/* nächsterZug kein Punkt für Gegner */
 		let tmp2: any = this.nextRoundnoWin(possibleChoices);
 		if (tmp2) return tmp2;
