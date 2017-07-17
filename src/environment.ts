@@ -1,9 +1,10 @@
+/* rename this file to environment.ts */
 export const firebaseConfig  = {
-  apiKey: "AIzaSyDAgqOlxaMGDwx8_0Jh14DEHR_gaN2xNLs",
-  authDomain: "tictactoe-440b3.firebaseapp.com",
-  databaseURL: "https://tictactoe-440b3.firebaseio.com",
-  projectId: "tictactoe-440b3",
-  storageBucket: "tictactoe-440b3.appspot.com",
-  messagingSenderId: "495290538261"
+  apiKey: "AAA",
+  authDomain: "BBB.firebaseapp.com",
+  databaseURL: "https://CCC.firebaseio.com",
+  projectId: "DDDD",
+  storageBucket: "EEEE.appspot.com",
+  messagingSenderId: "FFF"
 };
-export const webClientIdGooglePlusApi = '495290538261-97tkujbj8pq8slcs0j8ptp5e9692a0l1.apps.googleusercontent.com';
+export const webClientIdGooglePlusApi = 'XXXX.apps.googleusercontent.com';
