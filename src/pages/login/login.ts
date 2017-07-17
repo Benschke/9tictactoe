@@ -44,7 +44,7 @@ export class LoginPage {
     this.auth.signInGoogle();
   }
   clearFirebase():void{
-    //wenn multiplayer und nicht created == z.b. handy neu gestartet lobby löschen
+    //wenn multiplayer lobby erstellt wurde, dass handy neugestartet wurde (lobby ist noch in firebase vorhanden) und die trigger wieder funken wird die alte lobby gelöscht
     //damit die trigger funken
     if(!this.firstEnterd){
       this.firstEnterd = true;      

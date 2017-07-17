@@ -1,5 +1,5 @@
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { Component } from '@angular/core';
+import { Component,NgZone } from '@angular/core';
 // import { Observable } from 'rxjs/Observable';
 import { GamePage } from '../game/game';
 import { GamestatusProvider } from '../../providers/gamestatus/gamestatus';
@@ -22,21 +22,24 @@ import { AuthProvider } from '../../providers/auth/auth';
 })
 export class LobbyPage {
   created: boolean = false;
-  items: FirebaseListObservable<any[]>;
+  lobbys = [];
   fireDB = firebase.database();
   ref = firebase.database().ref("/games");
   gameType;
-  lobby;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public db: AngularFireDatabase, public auth: AuthProvider, public gameStatus: GamestatusProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public db: AngularFireDatabase, public auth: AuthProvider, public gameStatus: GamestatusProvider, public zone: NgZone) {
     this.gameType = this.navParams.get('type');
-    this.items = db.list('/games', {
-      query: {
-        orderByChild: 'state',
-        equalTo: 1
-      }
-    });
+    this.initLobbys();   
   }
   ionViewDidLoad() {}
+
+  initLobbys(){
+    const query: any = this.ref.orderByChild("state").equalTo(1);
+    query.on('child_added', (snap)=>{
+      this.zone.run(()=>{
+        this.lobbys.push({key: snap.getKey(), name: snap.val().creator_displayName});
+      });      
+    });
+  }
 
   enterGame(playerturn, key):void{
     const query = this.ref.child(key);
