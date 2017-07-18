@@ -1,10 +1,12 @@
-import { Injectable,NgZone } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { PlayerProvider } from '../player/player';
+import { Observable, Subscription } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import * as firebase from 'firebase/app';
 
 @Injectable()
 export class GamestatusProvider {
+	gamePage;
 	players: PlayerProvider[] = [new PlayerProvider, new PlayerProvider]; // players[0] = local players[1] = wenn multiplayer spieler
 	turn: boolean = true;
 	symbol: boolean; /* hilfs Var für MP */
@@ -13,6 +15,14 @@ export class GamestatusProvider {
 	won_fields: any = this.initWon_Fields(); /* false, 1, 2, 3 = feld voll kein sieger*/
 	fields: any = this.initField();
 	nextfield: any = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+	timeLeftTimer: number = 30;
+
+	timeLeft;
+	time;
+	private timer;
+	private sub: Subscription;
+	callBack;
+
 	constructor(public player: PlayerProvider, public zone: NgZone) { }
 	resett(): void {
 		this.won_fields = this.initWon_Fields();
@@ -51,7 +61,7 @@ export class GamestatusProvider {
 	initMultiplayer(key): void {
 		this.key = key;
 		this.resett();
-		this.checkForUpdates(key);
+		this.checkForUpdates(key);		
 	}
 
 	checkForUpdates(key) {
@@ -62,6 +72,7 @@ export class GamestatusProvider {
 				this.updatewon_Fields(snap.val().won_fields);
 				this.updateFields(snap.val().fields);
 				this.updateNextField(snap.val().nextField);
+				this.startTimer_();
 			});
 		});
 	}
@@ -89,12 +100,37 @@ export class GamestatusProvider {
 	initWon_Fields(): any {
 		return [false, false, false, false, false, false, false, false, false];
 	}
-	getScore(symbol):number{
-		let counter:number=  0;
-		for(let field of this.won_fields){
-			if(field == symbol) ++counter;
+	getScore(symbol): number {
+		let counter: number = 0;
+		for (let field of this.won_fields) {
+			if (field == symbol)++counter;
 		}
 		return counter;
+	}
+	startTimer(time, callback) {
+		this.time = time;
+		this.callBack = callback;
+		this.startTimer_();
+	}
+	startTimer_(){
+		this.stopTimer();
+		this.timeLeft = this.time;
+		this.timer = Observable.timer(1000, 1000);
+		this.sub = this.timer.subscribe(() => {
+			this.zone.run(() => {
+				--this.timeLeft;
+				if (!this.timeLeft) {
+					this.stopTimer();
+					let tmp: boolean = (this.gameType == 2) && (this.turn == this.symbol);
+					if ((this.gameType != 2) || tmp) {
+						this.callBack();
+					}
+				}
+			});
+		});
+	}
+	stopTimer() {
+		if(this.sub) this.sub.unsubscribe();
 	}
 
 }

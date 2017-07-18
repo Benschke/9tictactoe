@@ -143,6 +143,8 @@ export class GameServiceProvider {
 				break;
 			}
 		}
+		this.gamePage.stopTimer();
+		if(this.gameStatus.nextfield) this.gamePage.startTimer(this.gameStatus.timeLeftTimer);
 	}
 }
 
