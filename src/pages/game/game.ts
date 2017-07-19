@@ -33,9 +33,12 @@ export class GamePage {
     gameStatus.gamePage = this;
     if (typeof this.navParams.get('type') != 'undefined') gameStatus.gameType = this.navParams.get('type');
     else gameStatus.gameType = 2;
-    if (gameStatus.gameType == 0) gameStatus.players[1].name = "Bot";
-    if (gameStatus.gameType == 1) gameStatus.players[1].name = "Guest2";
     if (gameStatus.gameType == 2) this.initChat();
+    else{
+      gameStatus.symbol = true;
+      if (gameStatus.gameType == 0) gameStatus.players[1].name = "Bot";
+      if (gameStatus.gameType == 1) gameStatus.players[1].name = "Guest2";
+    }
     this.startTimer(30);
   }
 
@@ -47,10 +50,12 @@ export class GamePage {
   }
 
   startTimer(time){
-    this.gameStatus.startTimer(30,()=>{
+    this.gameStatus.startTimer(time,()=>{
       if(this.gameStatus.timeLeft == 0){
-        let pos: any = this.getRandomPossibleTile(); //todo gehört hier nicht hin gehört in einen provider
-        this.playerClick(pos[0], pos[1], pos[2]);
+        if(!this.gameService.isGameOver()){
+          let pos: any = this.getRandomPossibleTile(); //todo gehört hier nicht hin gehört in einen provider
+          this.playerClick(pos[0], pos[1], pos[2]);
+        }
       }
     });		
   }
@@ -96,7 +101,7 @@ export class GamePage {
   getRandomPossibleTile(): any{
     let x: number = this.gameStatus.nextfield[0];
     let field: any = this.gameStatus.fields[x];
-    let y: number = 0;
+    let y: number = 0;    
     for(let row of field){
       let z : number = 0;
       for(let tile of row){
@@ -113,6 +118,7 @@ export class GamePage {
   btnRestartGame(): void {
     if (this.gameStatus.gameType == 0 || this.gameStatus.gameType == 1) this.gameStatus.resett();
     //else iwas wegen mit mp online
+    if(this.gameStatus.gameType==0 && !this.gameStatus.turn) this.playerClick(4,2,2); // fake click damit der bot clicked
   }
 
   btnReturn(): void {

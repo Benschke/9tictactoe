@@ -15,8 +15,8 @@ export class GamestatusProvider {
 	won_fields: any = this.initWon_Fields(); /* false, 1, 2, 3 = feld voll kein sieger*/
 	fields: any = this.initField();
 	nextfield: any = [0, 1, 2, 3, 4, 5, 6, 7, 8];
-	timeLeftTimer: number = 30;
-
+	
+	timeLeftTimer: number = 30;//30;
 	timeLeft;
 	time;
 	private timer;
@@ -131,6 +131,22 @@ export class GamestatusProvider {
 	}
 	stopTimer() {
 		if(this.sub) this.sub.unsubscribe();
+	}
+	getWinner(){
+		let x:number = this.getScore(1);
+		let o:number = this.getScore(2);
+		
+		if(x==o) return "Draw!";
+
+		if(x>o){
+			if(this.gameType!=0) return this.players[0].name + " won!";
+			if(this.symbol==true) return "You won!"
+			else return "You loose!";
+		}else{
+			if(this.gameType!=0) return this.players[1].name + " won!";
+			if(this.symbol==true) return "You loose!"
+			else return "You Win!"
+		}
 	}
 
 }

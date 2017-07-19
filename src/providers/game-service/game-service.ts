@@ -120,31 +120,35 @@ export class GameServiceProvider {
 		return true;
 	}
 	playerClick(x, y, z):void{
+		let validClick:boolean = false; // ohne könnte man nicht gültige tiles anklicken um den timer zu resetten
 		switch (this.gameStatus.gameType) {
 			case 0: {
 				/* Spieler */
-				if (this.gameStatus.turn) this.PlayerClick(x, y, z);
+				if (this.gameStatus.turn) if(this.PlayerClick(x, y, z)) validClick=true;
 				/* BOT */
 				if (!this.gameStatus.turn && !this.gameOver()) {
 					let choice: any = this.bot.getChoice();
 					if (choice) {
 						if (!this.PlayerClick(choice[0], choice[1], choice[2])) console.log("Fehlerhaftes Tile ausgewählt!" + choice);
+						else validClick = true;
 					}
 					else console.log("Bot-Choice-Error");
 				}
 				break;
 			}
 			case 1: {
-				this.localMP(x, y, z);
+				if(this.localMP(x, y, z)) validClick = true;
 				break;
 			}
 			case 2: {
-				this.globalMP(x, y, z);
+				if(this.globalMP(x, y, z)) validClick= true;
 				break;
 			}
 		}
-		this.gamePage.stopTimer();
-		if(this.gameStatus.nextfield) this.gamePage.startTimer(this.gameStatus.timeLeftTimer);
+		if(validClick) {
+			this.gamePage.stopTimer();
+			if(this.gameStatus.nextfield) this.gamePage.startTimer(this.gameStatus.timeLeftTimer);
+		}
 	}
 }
 

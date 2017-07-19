@@ -1,4 +1,10 @@
+<ion-header *ngIf="gameService.isGameOver()">
+  <ion-navbar>
+    <ion-title>{{gameStatus.getWinner()}}</ion-title>
+  </ion-navbar>  
+</ion-header>
 <ion-content padding>
+    <div *ngIf="gameService.isGameOver()"><br><br><br></div>
     <ion-row>
         <ion-col col-12 col-md-6>
             <ion-grid [ngClass]="getPlayerTurnClass()" class="noPadding">
