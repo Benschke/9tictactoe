@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { HomePage } from '../home/home';
-
+// import { HomePage } from '../home/home';
+import { TabsPage } from '../tabs/tabs';
 import { GamestatusProvider } from '../../providers/gamestatus/gamestatus';
 
 import { AuthProvider } from '../../providers/auth/auth';
@@ -21,7 +21,7 @@ export class LoginPage {
         // wenn anonym dann setze name Guest-{{UID}}        
         this.gameStatus.players[0].name = this.auth.getdisplayName();
         this.clearFirebase();
-        this.navCtrl.setRoot(HomePage);
+        this.navCtrl.setRoot(TabsPage);
       }
     });
     this.db.listenToLogginStatus();

@@ -4,14 +4,13 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { BotProvider } from '../providers/bot/bot';
 import { GameServiceProvider } from '../providers/game-service/game-service';
-import { TabsProvider } from '../providers/tabs/tabs';
 
 
 import { LoginPage } from '../pages/login/login';
 
 @Component({
   templateUrl: 'app.html',
-  providers: [GameServiceProvider, BotProvider,TabsProvider]
+  providers: [GameServiceProvider, BotProvider]
 })
 export class MyApp {
   rootPage: any = LoginPage;

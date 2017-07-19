@@ -119,6 +119,20 @@ export class GameServiceProvider {
 		}
 		return true;
 	}
+	
+	getRandomTile():any{
+		var x:number = Math.floor(Math.random()*this.gameStatus.nextfield.length);
+		let y:number = 0;
+		for(let row of this.gameStatus.fields[x]){
+			let z: number = 0;
+			for(let tile of row){
+				if(tile == 0) return [x,y,z];
+				++z;
+			}
+			++y;
+		}
+	}
+
 	playerClick(x, y, z):void{
 		let validClick:boolean = false; // ohne könnte man nicht gültige tiles anklicken um den timer zu resetten
 		switch (this.gameStatus.gameType) {
@@ -146,8 +160,8 @@ export class GameServiceProvider {
 			}
 		}
 		if(validClick) {
-			this.gamePage.stopTimer();
-			if(this.gameStatus.nextfield) this.gamePage.startTimer(this.gameStatus.timeLeftTimer);
+			this.gameStatus.stopTimer();
+			if(this.gameStatus.nextfield) this.gameStatus.startTimer_();
 		}
 	}
 }

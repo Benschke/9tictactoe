@@ -20,7 +20,7 @@ export class GamePage {
   index2 = [0, 1, 2];
   chat = [];
   newMessage;
-
+  timeLeft=30;
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public gameService: GameServiceProvider,
@@ -30,38 +30,28 @@ export class GamePage {
     public db: FirebaseProvider) {
     gameStatus.resett();
     gameService.gamePage = this;
-    gameStatus.gamePage = this;
     if (typeof this.navParams.get('type') != 'undefined') gameStatus.gameType = this.navParams.get('type');
     else gameStatus.gameType = 2;
+    if (gameStatus.gameType == 0) gameStatus.players[1].name = "Bot";
+    if (gameStatus.gameType == 1) gameStatus.players[1].name = "Guest2";
     if (gameStatus.gameType == 2) this.initChat();
-    else{
-      gameStatus.symbol = true;
-      if (gameStatus.gameType == 0) gameStatus.players[1].name = "Bot";
-      if (gameStatus.gameType == 1) gameStatus.players[1].name = "Guest2";
-    }
-    this.startTimer(30);
   }
 
-  ionViewWillEnter() {}
+  ionViewWillEnter() {
+    this.gameStatus.startTimer(30,()=>{
+      if(this.gameStatus.timeLeft==0){
+        this.gameStatus.stopTimer();
+        if(!this.gameService.isGameOver()){
+          let pos:any = this.gameService.getRandomTile();
+          this.playerClick(pos[0],pos[1],pos[2]);
+        }      
+      }
+    });
+  }
 
   ionViewWillLeave() {
     if(this.gameStatus.gameType == 2) this.db.stopListenToMessages(this.gameStatus.key);
-    if(this.gameStatus.timeLeft) this.stopTimer();
-  }
-
-  startTimer(time){
-    this.gameStatus.startTimer(time,()=>{
-      if(this.gameStatus.timeLeft == 0){
-        if(!this.gameService.isGameOver()){
-          let pos: any = this.getRandomPossibleTile(); //todo gehört hier nicht hin gehört in einen provider
-          this.playerClick(pos[0], pos[1], pos[2]);
-        }
-      }
-    });		
-  }
-
-  stopTimer(){
-   this.gameStatus.stopTimer();
+    this.gameStatus.stopTimer();
   }
 
   initChat() {
@@ -97,28 +87,12 @@ export class GamePage {
   }
 
   ionViewDidLoad(): void { }
-
-  getRandomPossibleTile(): any{
-    let x: number = this.gameStatus.nextfield[0];
-    let field: any = this.gameStatus.fields[x];
-    let y: number = 0;    
-    for(let row of field){
-      let z : number = 0;
-      for(let tile of row){
-        if(tile==0) return [x,y,z];
-        ++z;
-      }
-      ++y;
-    }
-  }
-
   playerClick(x, y, z): void {
     this.gameService.playerClick(x, y, z);
   }
   btnRestartGame(): void {
     if (this.gameStatus.gameType == 0 || this.gameStatus.gameType == 1) this.gameStatus.resett();
     //else iwas wegen mit mp online
-    if(this.gameStatus.gameType==0 && !this.gameStatus.turn) this.playerClick(4,2,2); // fake click damit der bot clicked
   }
 
   btnReturn(): void {

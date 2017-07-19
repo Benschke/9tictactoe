@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController } from 'ionic-angular';
-import { TabsProvider } from '../../providers/tabs/tabs';
-
+import { HomePage } from '../home/home';
+import { StatsPage } from '../stats/stats';
+import { RulesPage } from '../rules/rules';
 /**
  * Generated class for the TabsPage tabs.
  *
@@ -15,11 +16,10 @@ import { TabsProvider } from '../../providers/tabs/tabs';
 @IonicPage()
 export class TabsPage {
 
-  gameRoot = 'GamePage'
-  statsRoot = 'StatsPage'
-  rulesRoot = 'RulesPage'
+  homeRoot = HomePage;
+  statsRoot = StatsPage;
+  rulesRoot = RulesPage;
 
-
-  constructor(public navCtrl: NavController, public tab: TabsProvider) {}
+  constructor(public navCtrl: NavController) {}
 
 }

@@ -5,7 +5,7 @@ import { TabsPage } from './tabs';
 
 @NgModule({
   declarations: [
-    TabsPage,
+    TabsPage
     // GamePage,
   ],
   imports: [

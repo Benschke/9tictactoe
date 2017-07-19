@@ -7,12 +7,13 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { GooglePlus } from '@ionic-native/google-plus';
 
 import { MyApp } from './app.component';
-// import { HomePage } from '../pages/home/home';
-// import { GamePage } from '../pages/game/game';
+import { HomePage } from '../pages/home/home';
+import { GamePage } from '../pages/game/game';
 import { LoginPage } from '../pages/login/login';
 import { LobbyPage } from '../pages/lobby/lobby';
-// import { RulesPage } from '../pages/rules/rules';
+import { RulesPage } from '../pages/rules/rules';
 import { TabsPage } from '../pages/tabs/tabs';
+
 
 import { BotProvider } from '../providers/bot/bot';
 import { GameServiceProvider } from '../providers/game-service/game-service';
@@ -28,18 +29,17 @@ import { firebaseConfig } from '../environment';
 import { PlayerProvider } from '../providers/player/player';
 import { AuthProvider } from '../providers/auth/auth';
 import { FirebaseProvider } from '../providers/firebase/firebase';
-import { TabsProvider } from '../providers/tabs/tabs';
 
 firebase.initializeApp(firebaseConfig);
 
 @NgModule({
   declarations: [
     MyApp,
-    // HomePage,
-    // GamePage,
+    HomePage,
+    GamePage,
     LoginPage,
     LobbyPage,
-    // RulesPage,
+    RulesPage,
     TabsPage
   ],
   imports: [
@@ -53,11 +53,11 @@ firebase.initializeApp(firebaseConfig);
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    // HomePage,
-    // GamePage,
+    HomePage,
+    GamePage,
     LoginPage,
-    // LobbyPage,
-    // RulesPage,
+    LobbyPage,
+    RulesPage,
     TabsPage
   ],
   providers: [
@@ -70,8 +70,7 @@ firebase.initializeApp(firebaseConfig);
     GamestatusProvider,
     PlayerProvider,
     AuthProvider,
-    FirebaseProvider,
-    TabsProvider
+    FirebaseProvider
   ]
 })
 export class AppModule { }
