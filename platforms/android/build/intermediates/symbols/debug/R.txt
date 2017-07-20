@@ -76,3 +76,4 @@ int styleable SignInButton_buttonSize 0
 int styleable SignInButton_colorScheme 1
 int styleable SignInButton_scopeUris 2
 int xml config 0x7f040000
+int xml provider_paths 0x7f040001

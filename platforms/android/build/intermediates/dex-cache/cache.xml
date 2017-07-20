@@ -3,12 +3,12 @@
 
     <item
         is-multidex="false"
-        jar="C:\Users\KNG HOLDY\AppData\Local\Android\Sdk\extras\android\m2repository\com\android\support\support-annotations\24.0.0\support-annotations-24.0.0.jar"
+        jar="C:\Users\KNG HOLDY\AppData\Local\Android\Sdk\extras\android\m2repository\com\android\support\support-annotations\24.1.1\support-annotations-24.1.1.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
-        sha1="2943c74db6d4346ab8c6531adac91fa05c137c40">
-        <dex dex="C:\9tictactoe\platforms\android\build\intermediates\pre-dexed\debug\support-annotations-24.0.0_78ab11dcb76bb19dc9d0edc04e95aa7b538d1495.jar" />
+        sha1="3af19f153122737b372622fa6c81dd11a1c6b999">
+        <dex dex="C:\9tictactoe\platforms\android\build\intermediates\pre-dexed\debug\support-annotations-24.1.1_703eacb5c0fe481ef6365799408b7b0d7dd9fe88.jar" />
     </item>
     <item
         is-multidex="false"
@@ -48,12 +48,12 @@
     </item>
     <item
         is-multidex="false"
-        jar="C:\9tictactoe\platforms\android\build\intermediates\exploded-aar\com.android.support\support-v4\24.0.0\jars\libs\internal_impl-24.0.0.jar"
+        jar="C:\9tictactoe\platforms\android\build\intermediates\exploded-aar\com.android.support\support-v4\24.1.1\jars\classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
-        sha1="fcaf463e10e69c1923ccf1edeba3b4196d239e00">
-        <dex dex="C:\9tictactoe\platforms\android\build\intermediates\pre-dexed\debug\internal_impl-24.0.0_b8b66c24093a75867dc1495ad6769a509bc38459.jar" />
+        sha1="6d7d803871e3203465f71a163e7af104f807b446">
+        <dex dex="C:\9tictactoe\platforms\android\build\intermediates\pre-dexed\debug\com.android.support-support-v4-24.1.1_bf89aa7ae8cfde27c9a5788c73be858da1cbf876.jar" />
     </item>
     <item
         is-multidex="false"
@@ -66,12 +66,12 @@
     </item>
     <item
         is-multidex="false"
-        jar="C:\9tictactoe\platforms\android\build\intermediates\exploded-aar\com.android.support\support-v4\24.0.0\jars\classes.jar"
+        jar="C:\9tictactoe\platforms\android\build\intermediates\exploded-aar\com.android.support\support-v4\24.1.1\jars\libs\internal_impl-24.1.1.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
-        sha1="2f7e6e2dad1bccaf68a8820820adc6c0d5b96d37">
-        <dex dex="C:\9tictactoe\platforms\android\build\intermediates\pre-dexed\debug\com.android.support-support-v4-24.0.0_514b7c105c5f2ac0e27a1fb04ecf6eaab6b01b04.jar" />
+        sha1="f78c2f395cb096f9dc1dc07e729922b8fcd3c4f5">
+        <dex dex="C:\9tictactoe\platforms\android\build\intermediates\pre-dexed\debug\internal_impl-24.1.1_893297a1c994457f7ceab7344a4863d0f0ae0bad.jar" />
     </item>
     <item
         is-multidex="false"

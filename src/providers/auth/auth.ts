@@ -35,12 +35,12 @@ export class AuthProvider {
   getcurrentUser():any{
     return firebase.auth().currentUser;
   }
-  getdisplayName():string{
-    //return (firebase.auth().currentUser.isAnonymous) ? "Guest-" + firebase.auth().currentUser.uid : firebase.auth().currentUser.displayName;
-    return (firebase.auth().currentUser.isAnonymous) ? "Guest" : firebase.auth().currentUser.displayName;
+  getdisplayName():string{    
+    // return (firebase.auth().currentUser.isAnonymous) ? "Guest" : firebase.auth().currentUser.displayName;
+    return firebase.auth().currentUser.displayName;
   }
 
   getUserUid():string{
     return this.getcurrentUser().uid;
-  }
+  } 
 }

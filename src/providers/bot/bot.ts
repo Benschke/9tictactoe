@@ -92,13 +92,13 @@ export class BotProvider {
 		
 		/* win gegner abwehren */
 		for(let fieldNumber of possibleChoices){
-			var tmp: any = this.isWin(fieldNumber, 1); // 1 spieler 2 bot
-			if(tmp) return tmp;
+			var tmp2: any = this.isWin(fieldNumber, 1); // 1 spieler 2 bot
+			if(tmp2) return tmp2;
 		}
 
 		/* nächsterZug kein Punkt für Gegner */
-		let tmp2: any = this.nextRoundnoWin(possibleChoices);
-		if (tmp2) return tmp2;
+		let tmp3: any = this.nextRoundnoWin(possibleChoices);
+		if (tmp3) return tmp3;
 
 		/* random */
 		return (this.randomTile(possibleChoices));

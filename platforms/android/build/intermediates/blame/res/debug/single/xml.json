@@ -1,5 +1,9 @@
 [
     {
+        "merged": "C:\\9tictactoe\\platforms\\android\\build\\intermediates\\res\\merged\\debug\\xml\\provider_paths.xml",
+        "source": "C:\\9tictactoe\\platforms\\android\\res\\xml\\provider_paths.xml"
+    },
+    {
         "merged": "C:\\9tictactoe\\platforms\\android\\build\\intermediates\\res\\merged\\debug\\xml\\config.xml",
         "source": "C:\\9tictactoe\\platforms\\android\\res\\xml\\config.xml"
     }

@@ -1,16 +1,21 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { AuthProvider } from '../auth/auth'
-import * as firebase from 'firebase/app';
+// import * as firebase from 'firebase/app';
+import firebase from 'firebase';
 
 @Injectable()
 export class FirebaseProvider {
   private gameRef: any;
+  private storageRef: any;
+  private profileRef: any;
   loggedIn = new EventEmitter();
   openLobbys = new EventEmitter();
   joinedLobby = new EventEmitter();
   newMessages = new EventEmitter();
   constructor(public auth: AuthProvider) {
     this.gameRef = firebase.database().ref('/games');
+    this.profileRef = firebase.database().ref('/profiles');
+    this.storageRef = firebase.storage().ref();
   }
 
   listenToLogginStatus(){
@@ -125,5 +130,49 @@ export class FirebaseProvider {
   }
   pushMessage(key,messageInfos){
     this.gameRef.child(key).child('messages').push(messageInfos);
+  }
+  /* profile */
+  deleteProfilePicture(uid){
+    const imageRef = this.storageRef.child('profiles/'+uid+'.jpg');
+    return new Promise((resolve,reject)=>{
+      imageRef.delete().then(()=>resolve(true)).catch((err)=>reject(err.code));
+    });    
+  }
+
+  updateProfilePicture(captureDataUrl,uid){
+    const imageRef = this.storageRef.child('profiles/'+uid+'.jpg');
+    return new Promise((resolve,reject)=>{
+      imageRef.putString(captureDataUrl,firebase.storage.StringFormat.DATA_URL).then((snap)=>{
+        resolve(true);
+      });
+    });
+  }
+  getProfilePicture(uid){
+    const imageRef = this.storageRef.child('profiles/'+uid+'.jpg');
+    return new Promise((resolve,reject)=>{
+      imageRef.getDownloadURL().then((url)=>{
+        resolve(url);
+      }).catch((err)=>{
+        /* default pic */
+        const imgRef = this.storageRef.child('profiles/defaultPicture.jpg');
+        imgRef.getDownloadURL().then((url2)=>{
+          resolve(url2);
+        }).catch((err)=>reject(err.code));
+      });
+    });
+  }
+  getProfile(uid){
+    const profileRef = this.profileRef.child(uid);
+    return new Promise((resolve,reject)=>{
+      profileRef.once('value', (snap)=>{
+        if(snap.val()) resolve(snap.val());
+        else reject(snap.val());
+      });
+    });    
+  }
+  updateName(name:string){
+    this.auth.getcurrentUser().updateProfile({
+      displayName: name
+    }).then(()=>{;}).catch(()=>alert('updateName failed'));
   }
 }

@@ -1,23 +1,59 @@
-<!--
-  Generated template for the StatsPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
   <ion-navbar>
-    <ion-title>stats</ion-title>
+    <ion-title (click)="editName()">
+      {{Displayname}}<ion-icon name="md-create"></ion-icon>
+    </ion-title>
   </ion-navbar>
-
 </ion-header>
+<ion-content no-padding>
+  <div class="profilePic" (click)="changePicture()">
+    <span *ngIf="!profilePic">Loading..</span>
+    <img [src]="profilePic" *ngIf="profilePic" />
+  </div>
+  <div class="stats">
+    <ion-grid>
+      <ion-row>
+        <ion-col col-4>
+          <ion-row col-12>
+            <span>
+              <strong>{{wins}}</strong>
+            </span>
+          </ion-row>
+          <ion-row col-12>
+            <span>Wins</span>
+          </ion-row>
+        </ion-col>
+        <ion-col col-4>
+          <ion-row col-12>
+            <span>
+              <strong>{{looses}}</strong>
+            </span>
+          </ion-row>
+          <ion-row col-12>
+            <span>Looses</span>
+          </ion-row>
+        </ion-col>
+        <ion-col col-4>
+          <ion-row col-12>
+            <span>
+              <strong>{{draws}}</strong>
+            </span>
+          </ion-row>
+          <ion-row col-12>
+            <span>Draws</span>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
 
+  <div class="pieChart">
+    <canvas baseChart [data]="doughnutChartData" [labels]="doughnutChartLabels" [chartType]="doughnutChartType" (chartHover)="chartHovered($event)"></canvas>
+  </div>
 
-<ion-content padding>
-<time-left-bar [percentLeft]="50" [text]="50" [innerColor]="green"></time-left-bar>
+  <!-- <br><br><br>
+  <div style="display:flex; flex-direction:column;justify-content:center">
+    --<button ion-button (click)="takePicture()">Lets take a picture!</button>--
+    ----
+  </div> -->
 </ion-content>
-
-   <!-- @Input('text') text: string;
-   @Input('percentLeft') percentLeft: number;
-   @Input('innerColor') innerColor: string;  -->
-

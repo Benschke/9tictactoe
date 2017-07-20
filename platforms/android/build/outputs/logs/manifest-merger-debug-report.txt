@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\9tictactoe\platforms\android\AndroidManifest.xml:2:1-17:12
+ADDED from C:\9tictactoe\platforms\android\AndroidManifest.xml:2:1-20:12
 	package
 		ADDED from C:\9tictactoe\platforms\android\AndroidManifest.xml:2:98-124
 		INJECTED from C:\9tictactoe\platforms\android\AndroidManifest.xml
@@ -36,13 +36,13 @@ ADDED from C:\9tictactoe\platforms\android\AndroidManifest.xml:4:5-67
 	android:name
 		ADDED from C:\9tictactoe\platforms\android\AndroidManifest.xml:4:22-64
 application
-ADDED from C:\9tictactoe\platforms\android\AndroidManifest.xml:5:5-12:19
+ADDED from C:\9tictactoe\platforms\android\AndroidManifest.xml:5:5-15:19
 MERGED from [com.google.android.gms:play-services-auth:10.0.1] C:\9tictactoe\platforms\android\build\intermediates\exploded-aar\com.google.android.gms\play-services-auth\10.0.1\AndroidManifest.xml:19:5-25:19
 MERGED from [com.google.android.gms:play-services-identity:10.0.1] C:\9tictactoe\platforms\android\build\intermediates\exploded-aar\com.google.android.gms\play-services-identity\10.0.1\AndroidManifest.xml:18:5-19
 MERGED from [com.google.android.gms:play-services-base:10.0.1] C:\9tictactoe\platforms\android\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\10.0.1\AndroidManifest.xml:18:5-20:19
 MERGED from [com.google.android.gms:play-services-tasks:10.0.1] C:\9tictactoe\platforms\android\build\intermediates\exploded-aar\com.google.android.gms\play-services-tasks\10.0.1\AndroidManifest.xml:4:5-19
 MERGED from [com.google.android.gms:play-services-basement:10.0.1] C:\9tictactoe\platforms\android\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\10.0.1\AndroidManifest.xml:19:5-21:19
-MERGED from [com.android.support:support-v4:24.0.0] C:\9tictactoe\platforms\android\build\intermediates\exploded-aar\com.android.support\support-v4\24.0.0\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-v4:24.1.1] C:\9tictactoe\platforms\android\build\intermediates\exploded-aar\com.android.support\support-v4\24.1.1\AndroidManifest.xml:25:5-20
 	android:label
 		ADDED from C:\9tictactoe\platforms\android\AndroidManifest.xml:5:81-113
 	android:supportsRtl
@@ -77,34 +77,51 @@ category#android.intent.category.LAUNCHER
 ADDED from C:\9tictactoe\platforms\android\AndroidManifest.xml:9:17-77
 	android:name
 		ADDED from C:\9tictactoe\platforms\android\AndroidManifest.xml:9:27-74
+provider#android.support.v4.content.FileProvider
+ADDED from C:\9tictactoe\platforms\android\AndroidManifest.xml:12:9-14:20
+	android:authorities
+		ADDED from C:\9tictactoe\platforms\android\AndroidManifest.xml:12:19-66
+		INJECTED from C:\9tictactoe\platforms\android\AndroidManifest.xml
+	android:grantUriPermissions
+		ADDED from C:\9tictactoe\platforms\android\AndroidManifest.xml:12:92-126
+	android:exported
+		ADDED from C:\9tictactoe\platforms\android\AndroidManifest.xml:12:67-91
+	android:name
+		ADDED from C:\9tictactoe\platforms\android\AndroidManifest.xml:12:127-181
+meta-data#android.support.FILE_PROVIDER_PATHS
+ADDED from C:\9tictactoe\platforms\android\AndroidManifest.xml:13:13-116
+	android:resource
+		ADDED from C:\9tictactoe\platforms\android\AndroidManifest.xml:13:75-113
+	android:name
+		ADDED from C:\9tictactoe\platforms\android\AndroidManifest.xml:13:24-74
 uses-sdk
-ADDED from C:\9tictactoe\platforms\android\AndroidManifest.xml:13:5-74
+ADDED from C:\9tictactoe\platforms\android\AndroidManifest.xml:16:5-74
 MERGED from [com.google.android.gms:play-services-auth:10.0.1] C:\9tictactoe\platforms\android\build\intermediates\exploded-aar\com.google.android.gms\play-services-auth\10.0.1\AndroidManifest.xml:17:5-42
 MERGED from [com.google.android.gms:play-services-auth-base:10.0.1] C:\9tictactoe\platforms\android\build\intermediates\exploded-aar\com.google.android.gms\play-services-auth-base\10.0.1\AndroidManifest.xml:4:5-42
 MERGED from [com.google.android.gms:play-services-identity:10.0.1] C:\9tictactoe\platforms\android\build\intermediates\exploded-aar\com.google.android.gms\play-services-identity\10.0.1\AndroidManifest.xml:17:5-42
 MERGED from [com.google.android.gms:play-services-base:10.0.1] C:\9tictactoe\platforms\android\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\10.0.1\AndroidManifest.xml:17:5-42
 MERGED from [com.google.android.gms:play-services-tasks:10.0.1] C:\9tictactoe\platforms\android\build\intermediates\exploded-aar\com.google.android.gms\play-services-tasks\10.0.1\AndroidManifest.xml:3:5-42
 MERGED from [com.google.android.gms:play-services-basement:10.0.1] C:\9tictactoe\platforms\android\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\10.0.1\AndroidManifest.xml:17:5-42
-MERGED from [com.android.support:support-v4:24.0.0] C:\9tictactoe\platforms\android\build\intermediates\exploded-aar\com.android.support\support-v4\24.0.0\AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:support-v4:24.1.1] C:\9tictactoe\platforms\android\build\intermediates\exploded-aar\com.android.support\support-v4\24.1.1\AndroidManifest.xml:21:5-23:54
 MERGED from [org.apache.cordova:CordovaLib:6.2.3:debug] C:\9tictactoe\platforms\android\build\intermediates\exploded-aar\org.apache.cordova\CordovaLib\6.2.3\debug\AndroidManifest.xml:25:5-44
 	tools:overrideLibrary
-		ADDED from [com.android.support:support-v4:24.0.0] C:\9tictactoe\platforms\android\build\intermediates\exploded-aar\com.android.support\support-v4\24.0.0\AndroidManifest.xml:23:9-51
+		ADDED from [com.android.support:support-v4:24.1.1] C:\9tictactoe\platforms\android\build\intermediates\exploded-aar\com.android.support\support-v4\24.1.1\AndroidManifest.xml:23:9-51
 	android:targetSdkVersion
-		ADDED from C:\9tictactoe\platforms\android\AndroidManifest.xml:13:42-71
+		ADDED from C:\9tictactoe\platforms\android\AndroidManifest.xml:16:42-71
 	android:minSdkVersion
-		ADDED from C:\9tictactoe\platforms\android\AndroidManifest.xml:13:15-41
+		ADDED from C:\9tictactoe\platforms\android\AndroidManifest.xml:16:15-41
 uses-permission#android.permission.GET_ACCOUNTS
-ADDED from C:\9tictactoe\platforms\android\AndroidManifest.xml:14:5-71
+ADDED from C:\9tictactoe\platforms\android\AndroidManifest.xml:17:5-71
 	android:name
-		ADDED from C:\9tictactoe\platforms\android\AndroidManifest.xml:14:22-68
+		ADDED from C:\9tictactoe\platforms\android\AndroidManifest.xml:17:22-68
 uses-permission#android.permission.USE_CREDENTIALS
-ADDED from C:\9tictactoe\platforms\android\AndroidManifest.xml:15:5-74
+ADDED from C:\9tictactoe\platforms\android\AndroidManifest.xml:18:5-74
 	android:name
-		ADDED from C:\9tictactoe\platforms\android\AndroidManifest.xml:15:22-71
+		ADDED from C:\9tictactoe\platforms\android\AndroidManifest.xml:18:22-71
 uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
-ADDED from C:\9tictactoe\platforms\android\AndroidManifest.xml:16:5-81
+ADDED from C:\9tictactoe\platforms\android\AndroidManifest.xml:19:5-81
 	android:name
-		ADDED from C:\9tictactoe\platforms\android\AndroidManifest.xml:16:22-78
+		ADDED from C:\9tictactoe\platforms\android\AndroidManifest.xml:19:22-78
 activity#com.google.android.gms.auth.api.signin.internal.SignInHubActivity
 ADDED from [com.google.android.gms:play-services-auth:10.0.1] C:\9tictactoe\platforms\android\build\intermediates\exploded-aar\com.google.android.gms\play-services-auth\10.0.1\AndroidManifest.xml:20:9-189
 	android:excludeFromRecents
