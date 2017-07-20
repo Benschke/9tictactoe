@@ -1,9 +1,13 @@
-<ion-content padding class="ctr">
-    <button ion-button full [navPush]="gamePage" [navParams]="{ type: 0}">Botgame</button>
-    <button ion-button full [navPush]="gamePage" [navParams]="{ type: 1}">2v2 - Local</button>
-    <button ion-button full [navPush]="lobbyPage" [navParams]="{ type: 2}">2v2 - Multiplayer</button>
-    <button ion-button full [navPush]="rulesPage">Rules</button>    
+<ion-content padding class="ctr bg">
+    <div class="buttons">
+        <button ion-button full color="dark" [navPush]="gamePage" [navParams]="{ type: 0}"><ion-icon name="md-person"></ion-icon> vs. <ion-icon name="logo-android"></ion-icon></button>
+        <button ion-button full color="dark" [navPush]="gamePage" [navParams]="{ type: 1}"><ion-icon name="md-person"></ion-icon> vs. <ion-icon name="md-person"></ion-icon></button>
+        <button ion-button full color="dark" [navPush]="lobbyPage" [navParams]="{ type: 2}"><ion-icon name="md-person"></ion-icon> vs. <ion-icon name="md-globe"></ion-icon></button>
+    </div>
 </ion-content>
 <!--
 /* 0 Bot, 1 MP Local, 2 MP Online*/
 -->
+
+
+

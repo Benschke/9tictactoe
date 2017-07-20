@@ -13,7 +13,7 @@ import { LoginPage } from '../pages/login/login';
 import { LobbyPage } from '../pages/lobby/lobby';
 import { RulesPage } from '../pages/rules/rules';
 import { TabsPage } from '../pages/tabs/tabs';
-
+import { StatsPage } from '../pages/stats/stats';
 
 import { BotProvider } from '../providers/bot/bot';
 import { GameServiceProvider } from '../providers/game-service/game-service';
@@ -29,7 +29,8 @@ import { firebaseConfig } from '../environment';
 import { PlayerProvider } from '../providers/player/player';
 import { AuthProvider } from '../providers/auth/auth';
 import { FirebaseProvider } from '../providers/firebase/firebase';
-
+import { TimeLeftBarComponent } from '../components/time-left-bar/time-left-bar';
+import { TictactoeComponent } from '../components/tictactoe/tictactoe';
 firebase.initializeApp(firebaseConfig);
 
 @NgModule({
@@ -40,7 +41,10 @@ firebase.initializeApp(firebaseConfig);
     LoginPage,
     LobbyPage,
     RulesPage,
-    TabsPage
+    TabsPage,
+    StatsPage,
+    TimeLeftBarComponent,
+    TictactoeComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,7 +52,7 @@ firebase.initializeApp(firebaseConfig);
     MaterialModule,
     AngularFireModule.initializeApp(firebaseConfig, '9tictactoe'),
     AngularFireDatabaseModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -58,7 +62,8 @@ firebase.initializeApp(firebaseConfig);
     LoginPage,
     LobbyPage,
     RulesPage,
-    TabsPage
+    TabsPage,
+    StatsPage
   ],
   providers: [
     StatusBar,

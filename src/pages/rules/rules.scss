@@ -1,11 +1,11 @@
 page-rules {
 	.back {
-		background-image: url('../../assets/late-game.jpg');
-		background-color: transparent;
-		z-index:-1;
+		background-image: url("../assets/img/bg.png");
+		width: 100%;
+		height: 100%;
 	}
 	#textrules {
-		font-size: 21px;
+		font-size: 15px;
 		font-style: italic;
 		font-color: green;
 		font-weight: bold;

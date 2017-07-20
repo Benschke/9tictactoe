@@ -1,0 +1,97 @@
+tictactoe {
+    $tetrisn: #ccc;
+    $tetrisnplus1: #000;
+    .borderVertical{
+       	border-top: 1px solid #ccc;
+		border-bottom: 1px solid #ccc; 
+    }
+    .borderHorizontal{
+        border-left: 1px solid #ccc;
+	    border-right: 1px solid #ccc; 
+    }
+    .tileText{
+        text-align: center;
+    }
+    .center{
+        text-align: center;
+    }
+    .container{
+        width: 100% !important;
+        height: 100% !important;
+        margin: 0;
+    }
+    .row{
+        margin: 0;
+        width: 90% !important;
+        height: 30% !important;
+    }
+    .noPadding{
+        padding:0;
+    }
+
+    .player1{
+	color: #0000b3;
+}
+.player2{
+	color: #b30000;
+}
+.player1_border{
+	border: 3px solid #0000b3;
+}
+.player2_border{
+	border: 3px solid #b30000;
+}
+.player1_won{
+	background: rgba(204,204,255, .70);	
+}
+.player2_won{
+	background: rgba(255, 204, 204, .70);
+}
+.default_color{
+	color: #ccc;
+}
+.tetris {	
+    margin-top: 25px;
+	width: 33%;
+	flex: 1 0 auto;
+    height:auto;
+}
+.bordern{
+	border: 1px solid $tetrisn;
+}
+.bordernplus1{
+	border: 1px solid $tetrisnplus1;
+}
+
+/* wird ausgewählt wenn der nächste spielzug in diesem feld stattfinden muss */
+.selected{
+	background: rgba(0, 0, 0, .15);
+}
+
+.tile {
+	cursor: pointer;
+	border: 1px solid #ccc;	
+	overflow:hidden; 
+	// height:100%; width:100%; 	
+	flex: 1 0 auto;
+    height:auto;
+}
+.text{
+	font-size: 5vw;
+}
+.text_smaller{
+	font-size: 3vw;
+}
+.ctr{
+	text-align: center;
+}
+.row.noPadding{
+  padding:0;
+}
+.noPadding{
+  padding:0;
+}
+
+
+
+}

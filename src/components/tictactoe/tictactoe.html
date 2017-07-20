@@ -1,0 +1,18 @@
+<!-- Generated template for the TictactoeComponent component -->
+ <ion-row *ngFor="let row of field; let i = index" [attr.data-index]="i" [ngClass]="{'borderVertical': i==1,'selected': fieldClass==0,'player1_won': fieldClass==1,'player2_won': fieldClass==2,'': fieldClass==-1}" class="row noPadding">
+  <ion-col *ngFor="let tile of row; let j = index" [attr.data-index]="j" [ngClass]="{'borderHorizontal': j==1}" class="center"
+    (click)="playerClick(Index,i,j)">
+    <span class="ctr text noPadding" [ngClass]="{'player1':tile==1,'player2': tile==2}">{{(tile==0)? ' ': ((tile==1)? 'x' : 'o')}}</span>
+    <!--  -->
+  </ion-col>
+</ion-row> 
+
+
+
+
+  <!-- getClassValue(v: number): number {
+
+    if(this.gameStatus.won_fields[v]==1) return 1;//"";
+    if(this.gameStatus.won_fields[v]==2) return 2;//"";
+    return -1;// "noPadding";
+  } -->

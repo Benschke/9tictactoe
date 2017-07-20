@@ -1,54 +1,71 @@
-<ion-content padding>
-    --{{gameStatus.timeLeft}}--
+<!-- if (this.isPossibleField(v)) return "selected noPadding";
+    if(this.gameStatus.won_fields[v]==1) return "player1_won noPadding";
+    if(this.gameStatus.won_fields[v]==2) return "player2_won noPadding";
+    return "noPadding"; -->
+<ion-content padding class="bg">
+
     <ion-row>
-        <ion-col col-12 col-md-6>
-            <ion-grid [ngClass]="getPlayerTurnClass()" class="noPadding">
-                <ion-row *ngFor="let tetrisIndex of index; let r = index; trackBy: trackByFn" class="noPadding">
-                    <ion-col *ngFor="let x of tetrisIndex; let x = index; trackBy: trackByFn" [ngClass]="getClassValue(x)" class="noPadding">
-                        <div [ngClass]="{'player1_won':gameStatus.won_fields[x]==1,'player2_won':gameStatus.won_fields[x]==2,'bordern':x%2==0,'bordernplus1':x%2!=0}"
-                            class="noPadding">
-                            <ion-row class="ctr fc noPadding" *ngFor="let y of index2; let y = index; trackBy: trackByFn">
-                                <ion-col class="noPadding" *ngFor="let z of index2; let z = index; trackBy: trackByFn" (click)="playerClick(x,y,z)">
-                                    <div class="tile fc noPadding">
-                                        <span class="ctr text noPadding" [ngClass]="{'player1':gameStatus.fields[x][y][z]==1,'player2': gameStatus.fields[x][y][z]==2}">{{(gameStatus.fields[x][y][z]==0)? ' ': ((gameStatus.fields[x][y][z]==1)? 'x' : 'o')}}</span>
-                                    </div>
-                                </ion-col>
-                            </ion-row>
-                        </div>
+        <ion-col col-6>
+            <span class="text_smaller" style="float:left;"><strong>{{gameStatus.players[0].name}}</strong>:</span><span class="player1 text_smaller">&nbsp;{{getScore(1)}}</span>
+        </ion-col>
+        <ion-col col-6>
+            <div style="float:right;"><span class="text_smaller" ><strong>{{gameStatus.players[1].name}}</strong>:</span><span class="player2 text_smaller">&nbsp;{{getScore(2)}}</span></div>
+        </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col col-12 col-md-6 class="ctr">
+            <ion-grid [ngClass]="getPlayerTurnClass()" class="ctr">
+                <ion-row *ngFor="let tetrisIndex of index">
+                    <ion-col *ngFor="let fieldIndex of tetrisIndex" class="ctr">
+                        <tictactoe [fieldClass]="getClassValue(fieldIndex)" [Index]=fieldIndex [field]="gameStatus.fields[fieldIndex]" (playerClicked)="playerClicked($event)"></tictactoe>
                     </ion-col>
                 </ion-row>
-
             </ion-grid>
+            <br>
+            <time-left-bar [percentLeft]="gameStatus.timeLeftPercentage" [text]="gameStatus.timeLeft" [innerColor]="gameStatus.timerColor"
+                style="width: 100%; height: 50%"></time-left-bar>
+            <div *ngIf="!gameService.isGameOver()&&gameStatus.gameType&&gameStatus.symbol==gameStatus.turn" class="ctr text"><br><strong>Your turn!</strong><br></div>
+            <div *ngIf="!gameService.isGameOver()&&gameStatus.gameType!=2" class="ctr text" [ngClass]="{'player1': gameStatus.turn,'player2': !gameStatus.turn}"><br><strong>{{gameStatus.turn? gameStatus.players[0].name : gameStatus.players[1].name}}'s turn!</strong><br></div>
         </ion-col>
         <ion-col col-sm-12 col-md-6>
-            <ion-row>
-                <ion-col col-12 col-md-6><span class="text_smaller"><strong>{{gameStatus.players[0].name}}</strong>:</span><span class="player1 text_smaller">&nbsp;{{getScore(1)}}</span></ion-col>
-                <ion-col col-12 col-md-6><span class="text_smaller"><strong>{{gameStatus.players[1].name}}</strong>:</span><span class="player2 text_smaller">&nbsp;{{getScore(2)}}</span></ion-col>
-            </ion-row>
             <!-- CHAT -->
             <ion-row *ngIf="gameStatus.gameType==2">
-                <form (keyup)="sendMessage($event)"> 
-                        <ion-row>
-                            <ul class="noPadding">
-                                <div *ngFor="let msg of chat" class="msg">
-                                    <li><strong>{{msg.name}}</strong>: {{msg.message}}</li>
-                                </div>
-                            </ul>
-                        </ion-row>
-                        <ion-row class="fullwidth bordertop">
-                            <ion-textarea placeholder="Enter a message" value="" name="msgBox" [(ngModel)]="newMessage"></ion-textarea>                    
+                <form (keyup)="sendMessage($event)">
+                    <ion-row>
+                        <ul class="noPadding">
+                            <div *ngFor="let msg of chat" class="msg">
+                                <li><strong>{{msg.name}}</strong>: {{msg.message}}</li>
+                            </div>
+                        </ul>
+                    </ion-row>
+                    <ion-row class="fullwidth bordertop">
+                        <ion-textarea placeholder="Enter a message" value="" name="msgBox" [(ngModel)]="newMessage"></ion-textarea>
                     </ion-row>
                 </form>
             </ion-row>
         </ion-col>
     </ion-row>
-
     <div *ngIf="gameService.isGameOver()">
         <br>
         <button ion-button (click)="btnRestartGame()" full block>Restart Game</button>
         <button ion-button (click)="btnReturn()" full block>Return</button>
     </div>
-
-    <div *ngIf="!gameService.isGameOver()&&gameStatus.gameType&&gameStatus.symbol==gameStatus.turn" class="ctr text"><br><strong>Your turn!</strong><br></div>
-    <div *ngIf="!gameService.isGameOver()&&gameStatus.gameType!=2" class="ctr text" [ngClass]="{'player1': gameStatus.turn,'player2': !gameStatus.turn}"><br><strong>{{gameStatus.turn? gameStatus.players[0].name : gameStatus.players[1].name}}'s turn!</strong><br></div>
 </ion-content>
+
+<!-- feld zeichnen v1 -->
+<!-- <ion-grid [ngClass]="getPlayerTurnClass()" class="noPadding">
+    <ion-row *ngFor="let tetrisIndex of index; let r = index; trackBy: trackByFn" class="noPadding">
+        <ion-col *ngFor="let x of tetrisIndex; let x = index; trackBy: trackByFn" [ngClass]="getClassValue(x)" class="noPadding">
+            <div [ngClass]="{'player1_won':gameStatus.won_fields[x]==1,'player2_won':gameStatus.won_fields[x]==2,'bordern':x%2==0,'bordernplus1':x%2!=0}"
+                class="noPadding">
+                <ion-row class="ctr fc noPadding" *ngFor="let y of index2; let y = index; trackBy: trackByFn">
+                    <ion-col class="noPadding" *ngFor="let z of index2; let z = index; trackBy: trackByFn" (click)="playerClick(x,y,z)">
+                        <div class="tile fc noPadding">
+                            <span class="ctr text noPadding" [ngClass]="{'player1':gameStatus.fields[x][y][z]==1,'player2': gameStatus.fields[x][y][z]==2}">{{(gameStatus.fields[x][y][z]==0)? ' ': ((gameStatus.fields[x][y][z]==1)? 'x' : 'o')}}</span>
+                        </div>
+                    </ion-col>
+                </ion-row>
+            </div>
+        </ion-col>
+    </ion-row>
+</ion-grid> -->

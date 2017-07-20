@@ -16,6 +16,8 @@ export class GamestatusProvider {
 	fields: any = this.initField();
 	nextfield: any = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 	
+	timerColor:string="green";
+	timeLeftPercentage:number=100;
 	timeLeftTimer: number = 30;//30;
 	timeLeft;
 	time;
@@ -116,6 +118,8 @@ export class GamestatusProvider {
 		this.stopTimer();
 		this.timeLeft = this.time;
 		this.timer = Observable.timer(1000, 1000);
+		this.timerColor = (this.time>10)?"green":"red"; // wenn ich timer und % nicht hier direkt setzte wirkt es als ob der timer beim wechsel laggt
+		this.timeLeftPercentage = 100;
 		this.sub = this.timer.subscribe(() => {
 			this.zone.run(() => {
 				--this.timeLeft;
@@ -125,6 +129,9 @@ export class GamestatusProvider {
 					if ((this.gameType != 2) || tmp) {
 						this.callBack();
 					}
+				}else{
+					this.timeLeftPercentage = 100-((this.timeLeft-this.time)*(-100)/this.time);
+					if(this.timeLeft<11) this.timerColor = "red";
 				}
 			});
 		});

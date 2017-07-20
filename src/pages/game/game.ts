@@ -12,7 +12,7 @@ import { GamestatusProvider } from '../../providers/gamestatus/gamestatus';
 
 @Component({
   selector: 'page-game',
-  templateUrl: 'game.html'
+  templateUrl: 'game.html',
 })
 
 export class GamePage {
@@ -21,6 +21,7 @@ export class GamePage {
   chat = [];
   newMessage;
   timeLeft=30;
+
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public gameService: GameServiceProvider,
@@ -74,11 +75,11 @@ export class GamePage {
     return false;
   }
 
-  getClassValue(v: number): string {
-    if (this.isPossibleField(v)) return "selected noPadding";
-    return "noPadding";
-    // if(v%2==0) return "bordern";
-    // return "bordernplus1";    
+  getClassValue(v: number): number {
+    if (this.isPossibleField(v))   return 0;//"selected noPadding";
+    if(this.gameStatus.won_fields[v]==1) return 1;//"player1_won noPadding";
+    if(this.gameStatus.won_fields[v]==2) return 2;//"player2_won noPadding";
+    return -1;// "noPadding";
   }
 
   getPlayerTurnClass(): string {
@@ -87,6 +88,9 @@ export class GamePage {
   }
 
   ionViewDidLoad(): void { }
+  playerClicked(event):void{
+    this.gameService.playerClick(event[0],event[1],event[2]);
+  }
   playerClick(x, y, z): void {
     this.gameService.playerClick(x, y, z);
   }

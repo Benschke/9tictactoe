@@ -25200,6 +25200,160 @@ ion-navbar.toolbar {
   }
 }
 
+tictactoe {
+  /* wird ausgewählt wenn der nächste spielzug in diesem feld stattfinden muss */
+}
+
+tictactoe .borderVertical {
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
+
+tictactoe .borderHorizontal {
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+}
+
+tictactoe .tileText {
+  text-align: center;
+}
+
+tictactoe .center {
+  text-align: center;
+}
+
+tictactoe .container {
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0;
+}
+
+tictactoe .row {
+  margin: 0;
+  width: 90% !important;
+  height: 30% !important;
+}
+
+tictactoe .noPadding {
+  padding: 0;
+}
+
+tictactoe .player1 {
+  color: #0000b3;
+}
+
+tictactoe .player2 {
+  color: #b30000;
+}
+
+tictactoe .player1_border {
+  border: 3px solid #0000b3;
+}
+
+tictactoe .player2_border {
+  border: 3px solid #b30000;
+}
+
+tictactoe .player1_won {
+  background: rgba(204, 204, 255, 0.7);
+}
+
+tictactoe .player2_won {
+  background: rgba(255, 204, 204, 0.7);
+}
+
+tictactoe .default_color {
+  color: #ccc;
+}
+
+tictactoe .tetris {
+  margin-top: 25px;
+  width: 33%;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 0 auto;
+  -ms-flex: 1 0 auto;
+  flex: 1 0 auto;
+  height: auto;
+}
+
+tictactoe .bordern {
+  border: 1px solid #ccc;
+}
+
+tictactoe .bordernplus1 {
+  border: 1px solid #000;
+}
+
+tictactoe .selected {
+  background: rgba(0, 0, 0, 0.15);
+}
+
+tictactoe .tile {
+  cursor: pointer;
+  border: 1px solid #ccc;
+  overflow: hidden;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 0 auto;
+  -ms-flex: 1 0 auto;
+  flex: 1 0 auto;
+  height: auto;
+}
+
+tictactoe .text {
+  font-size: 5vw;
+}
+
+tictactoe .text_smaller {
+  font-size: 3vw;
+}
+
+tictactoe .ctr {
+  text-align: center;
+}
+
+tictactoe .row.noPadding {
+  padding: 0;
+}
+
+tictactoe .noPadding {
+  padding: 0;
+}
+
+time-left-bar .symbol {
+  width: 100%;
+  text-align: center;
+  font-size: 25px;
+}
+
+time-left-bar .outer {
+  width: 100%;
+  text-align: center;
+  background-color: #f4f4f4;
+  border: 1px solid #dcdcdc;
+  color: #fff;
+  border-radius: 20px;
+  margin: 0;
+}
+
+time-left-bar .inner {
+  min-width: 15%;
+  white-space: nowrap;
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+time-left-bar table {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  width: auto;
+}
+
+time-left-bar td {
+  padding: 0;
+  margin: 0;
+}
+
 .player1 {
   color: #0000b3;
 }
@@ -25263,11 +25417,11 @@ ion-navbar.toolbar {
 }
 
 .text {
-  font-size: 2.5vw;
+  font-size: 5vw;
 }
 
 .text_smaller {
-  font-size: 2vw;
+  font-size: 3vw;
 }
 
 .ctr {
@@ -25299,22 +25453,42 @@ ul {
   border-top: 1px solid #000;
 }
 
-.buttons {
+.bg {
+  background-image: url("../assets/img/bg.png");
+  width: 100%;
+  height: 100%;
+}
+
+page-home .buttons {
   width: 100%;
 }
 
-.buttons button {
+page-home .buttons button {
   width: 100%;
+}
+
+page-home .bg {
+  background-image: url("../assets/img/bg.png");
+  width: 100%;
+  height: 100%;
+}
+
+page-home .buttons {
+  margin-top: 480px;
+}
+
+page-home ion-icon {
+  margin: 10px;
 }
 
 page-rules .back {
-  background-image: url("../../assets/late-game.jpg");
-  background-color: transparent;
-  z-index: -1;
+  background-image: url("../assets/img/bg.png");
+  width: 100%;
+  height: 100%;
 }
 
 page-rules #textrules {
-  font-size: 21px;
+  font-size: 15px;
   font-style: italic;
   font-color: green;
   font-weight: bold;
